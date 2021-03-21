@@ -12,11 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Login',
       theme: ThemeData(
-       
         primarySwatch: Colors.blue,
       ),
       home: WidgetLogin(),
     );
   }
 }
-

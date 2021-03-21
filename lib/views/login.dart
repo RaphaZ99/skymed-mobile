@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/views/cadastro-paciente-inicio.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
@@ -85,7 +86,11 @@ class _WidgetLoginState extends State<WidgetLogin> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('Não tem uma conta foi pressionado.');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WidgetCadastroPacienteInicio()),
+                    );
                   },
                   child: Text(
                     'Não tem uma conta? Cadastre-se',

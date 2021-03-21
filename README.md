@@ -1,16 +1,7 @@
-# skymed_mobile
+# Aplicativo de agendamentos SkyMed
 
-A new Flutter project.
+Aplicativo de agendamentos do sistema SkyMed [SkyMed Web](https://github.com/fdz23/SkyMed)
 
-## Getting Started
+## Projeto Fábrica de Software 5º período ADS - FATESG
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Projeto efetuado para demonstrar os conhecimentos adquiridos no 5º período de Análise e Desenvolvimento de Sistemas na faculdade SENAI FATESG.

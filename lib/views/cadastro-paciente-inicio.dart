@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/views/login.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
 import 'package:skymed_mobile/widgets/componentes/tema/circulos-topo.dart';
+
+import 'cadastro-paciente-fim.dart';
 
 class WidgetCadastroPacienteInicio extends StatefulWidget {
   @override
@@ -67,7 +70,13 @@ class _WidgetCadastroPacienteInicioState
                   margem: EdgeInsets.only(
                     top: 40,
                   ),
-                  callback: () => {},
+                  callback: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WidgetCadastroPacienteFim()),
+                    )
+                  },
                 ),
                 Botao(
                   titulo: 'Voltar',
@@ -77,7 +86,12 @@ class _WidgetCadastroPacienteInicioState
                   corBorda: Colors.red,
                   corInterna: Colors.white,
                   corLetra: Colors.black,
-                  callback: () => {},
+                  callback: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => WidgetLogin()),
+                    )
+                  },
                 ),
               ],
             ),

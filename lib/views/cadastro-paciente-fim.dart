@@ -78,13 +78,7 @@ class _WidgetCadastroPacienteFimState extends State<WidgetCadastroPacienteFim> {
                   corBorda: Colors.red,
                   corInterna: Colors.white,
                   corLetra: Colors.black,
-                  callback: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WidgetCadastroPacienteInicio()),
-                    )
-                  },
+                  callback: () => {Navigator.pop(context)},
                 ),
               ],
             ),

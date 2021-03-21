@@ -86,12 +86,7 @@ class _WidgetCadastroPacienteInicioState
                   corBorda: Colors.red,
                   corInterna: Colors.white,
                   corLetra: Colors.black,
-                  callback: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => WidgetLogin()),
-                    )
-                  },
+                  callback: () => {Navigator.pop(context)},
                 ),
               ],
             ),

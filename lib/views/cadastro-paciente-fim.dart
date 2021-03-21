@@ -4,12 +4,13 @@ import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
 import 'package:skymed_mobile/widgets/componentes/tema/circulos-topo.dart';
 
-class WidgetCadastroPaciente extends StatefulWidget {
+class WidgetCadastroPacienteFim extends StatefulWidget {
   @override
-  _WidgetCadastroPacienteState createState() => _WidgetCadastroPacienteState();
+  _WidgetCadastroPacienteFimState createState() =>
+      _WidgetCadastroPacienteFimState();
 }
 
-class _WidgetCadastroPacienteState extends State<WidgetCadastroPaciente> {
+class _WidgetCadastroPacienteFimState extends State<WidgetCadastroPacienteFim> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,34 +35,34 @@ class _WidgetCadastroPacienteState extends State<WidgetCadastroPaciente> {
                   child: Logo(),
                 ),
                 Campo(
-                  titulo: 'Nome',
+                  titulo: 'CEP',
                 ),
                 Campo(
-                  titulo: 'CPF',
+                  titulo: 'Logradouro',
                   margem: EdgeInsets.only(
                     top: 30,
                   ),
                 ),
                 Campo(
-                  titulo: 'RG',
+                  titulo: 'Bairro',
                   margem: EdgeInsets.only(
                     top: 30,
                   ),
                 ),
                 Campo(
-                  titulo: 'E-mail',
+                  titulo: 'Número',
                   margem: EdgeInsets.only(
                     top: 30,
                   ),
                 ),
                 Campo(
-                  titulo: 'Telefone',
+                  titulo: 'Complemento',
                   margem: EdgeInsets.only(
                     top: 30,
                   ),
                 ),
                 Botao(
-                  titulo: 'Continuar',
+                  titulo: 'Concluir',
                   margem: EdgeInsets.only(
                     top: 40,
                   ),

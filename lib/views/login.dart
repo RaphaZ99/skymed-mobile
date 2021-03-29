@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skymed_mobile/views/cadastro-paciente-inicio.dart';
+import 'package:skymed_mobile/views/recuperar-senha-paciente-informar-email.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
@@ -44,7 +45,13 @@ class _WidgetLoginState extends State<WidgetLogin> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('Esqueci minha senha foi pressionado.');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            WidgetRecuperarSenhaPacienteIformarEmail(),
+                      ),
+                    );
                   },
                   child: Text(
                     'Esqueci minha senha',

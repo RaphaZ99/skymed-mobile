@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:skymed_mobile/widgets/componentes/card-campo/containerInformacao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
+import 'package:skymed_mobile/widgets/componentes/card-campo/containerInputTexto.dart';
 import 'recuperar-senha-paciente-codigo.dart';
- 
 
 class WidgetRecuperarSenhaPacienteIformarEmail extends StatefulWidget {
   @override
@@ -16,48 +15,47 @@ class _WidgetRecuperarSenhaPacienteIformarEmailState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            child: ListView(
-              children: <Widget>[
-                ContainerInformacao(
-                  texto: "Recuperar Senha",
-                ),
-                GestureDetector(
-                  child: Text(
-                    'Digite seu E-mail para enviarmos um código \n para redefinirmos sua senha',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(height: 3),
-                  ),
-                ),
-                Campo(
-                  titulo: 'Informe seu e-mail',
-                  margem: EdgeInsets.only(
-                    top: 15,
-                  ),
-                ),
-                Botao(
-                  titulo: 'Próximo',
-                  corBorda: Colors.blue,
-                  corLetra: Colors.black,
-                  corInterna: Colors.white,
-                  margem: EdgeInsets.only(top: 30),
-                  callback: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            WidgetRecuperarSenhaPacienteCodigo()),
-                  ),
-                ),
-                Botao(
-                  titulo: 'Voltar',
-                  corBorda: Colors.red,
-                  corLetra: Colors.black,
-                ),
-              ],
+      body: Container(
+        child: ListView(
+          children: <Widget>[
+            WidgetContainerInputTexto(
+               texto: "Recuperar Senha",
+               tamanhoDaLetra: 25.0,
             ),
-          ),
-        ],
+            Text(
+              'Digite seu E-mail para enviarmos um código.',
+              textAlign: TextAlign.center,
+              
+              style: TextStyle(height: 4,
+              fontSize: 18.0),
+              
+            ),
+            Campo(
+              titulo: 'E-mail',
+              margem: EdgeInsets.only(
+                top: 15,
+              ),
+            ),
+            Botao(
+              titulo: 'Próximo',
+              corBorda: Colors.blue,
+              corLetra: Colors.black,
+              corInterna: Colors.white,
+              margem: EdgeInsets.only(top: 30),
+              callback: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) => WidgetRecuperarSenhaPacienteCodigo()),
+              ),
+            ),
+            Botao(
+              titulo: 'Voltar',
+              corBorda: Colors.red,
+              corLetra: Colors.black,
+              corInterna: Colors.white,
+              callback: () => Navigator.pop(context),
+            ),
+          ],
+        ),
       ),
     );
   }

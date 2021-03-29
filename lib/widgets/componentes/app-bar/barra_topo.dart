@@ -13,6 +13,13 @@ class BarraTopo extends StatelessWidget implements PreferredSizeWidget {
         textAlign: TextAlign.center,
       ),
       leading: Logo(),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.menu),
+          color: Colors.black,
+          onPressed: () => {},
+        ),
+      ],
       backgroundColor: Colors.white,
       toolbarHeight: 90,
     );

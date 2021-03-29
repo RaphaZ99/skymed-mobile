@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:skymed_mobile/views/recuperar-senha-paciente-nova-senha.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/containerInformacao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/containerRetangularTextField.dart';
-
-import '../widgets/componentes/card-campo/botao.dart';
 import '../widgets/componentes/card-campo/botao.dart';
 import '../widgets/componentes/card-campo/containerInformacao.dart';
-import '../widgets/componentes/card-campo/campo.dart';
-import '../widgets/componentes/card-campo/campo.dart';
+
 
 class WidgetRecuperarSenhaPacienteCodigo extends StatefulWidget {
   @override

@@ -49,6 +49,7 @@ flutter:
   assets:
   
       - assets/images/skymed-logo.png
+      - assets/images/icone-medico.png
   #   - images/a_dot_ham.jpeg
  
 

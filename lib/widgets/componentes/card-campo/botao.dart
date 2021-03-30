@@ -31,7 +31,7 @@ class Botao extends StatelessWidget {
       child: FractionallySizedBox(
         widthFactor: width ?? 0.85,
         child: ButtonTheme(
-          padding: EdgeInsets.fromLTRB(10.0, 25.0, 10.0, 25.0),
+          padding: EdgeInsets.all(10.0),
           // ignore: deprecated_member_use
           child: FlatButton(
             color: corInterna ?? Colors.black,

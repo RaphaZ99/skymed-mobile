@@ -17,7 +17,7 @@ class Campo extends StatelessWidget {
           decoration: InputDecoration(
             labelText: titulo,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
-            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32.0),
             ),

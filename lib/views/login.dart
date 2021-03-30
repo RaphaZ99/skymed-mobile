@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skymed_mobile/views/cadastro-paciente-inicio.dart';
 import 'package:skymed_mobile/views/recuperar-senha-paciente-informar-email.dart';
+import 'package:skymed_mobile/views/listagem-medicos.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
@@ -23,6 +24,7 @@ class _WidgetLoginState extends State<WidgetLogin> {
             padding: const EdgeInsets.only(
               left: 30.0,
               right: 30.0,
+              top: 60.0,
             ),
             child: ListView(
               children: <Widget>[
@@ -40,7 +42,7 @@ class _WidgetLoginState extends State<WidgetLogin> {
                   ehSenha: true,
                   titulo: 'Senha',
                   margem: EdgeInsets.only(
-                    top: 30,
+                    top: 15,
                   ),
                 ),
                 GestureDetector(
@@ -68,7 +70,13 @@ class _WidgetLoginState extends State<WidgetLogin> {
                   margem: EdgeInsets.only(
                     top: 15,
                   ),
-                  callback: () => {},
+                  callback: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WidgetListagemMedicos()),
+                    )
+                  },
                 ),
                 Divisor(),
                 Botao(

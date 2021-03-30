@@ -23,6 +23,7 @@ class _WidgetCadastroPacienteFimState extends State<WidgetCadastroPacienteFim> {
             padding: const EdgeInsets.only(
               left: 30.0,
               right: 30.0,
+              top: 60.0,
             ),
             child: ListView(
               padding: const EdgeInsets.only(
@@ -42,25 +43,25 @@ class _WidgetCadastroPacienteFimState extends State<WidgetCadastroPacienteFim> {
                 Campo(
                   titulo: 'Logradouro',
                   margem: EdgeInsets.only(
-                    top: 30,
+                    top: 15,
                   ),
                 ),
                 Campo(
                   titulo: 'Bairro',
                   margem: EdgeInsets.only(
-                    top: 30,
+                    top: 15,
                   ),
                 ),
                 Campo(
                   titulo: 'Número',
                   margem: EdgeInsets.only(
-                    top: 30,
+                    top: 15,
                   ),
                 ),
                 Campo(
                   titulo: 'Complemento',
                   margem: EdgeInsets.only(
-                    top: 30,
+                    top: 15,
                   ),
                 ),
                 Botao(
@@ -73,18 +74,12 @@ class _WidgetCadastroPacienteFimState extends State<WidgetCadastroPacienteFim> {
                 Botao(
                   titulo: 'Voltar',
                   margem: EdgeInsets.only(
-                    top: 40,
+                    top: 15,
                   ),
                   corBorda: Colors.red,
                   corInterna: Colors.white,
                   corLetra: Colors.black,
-                  callback: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WidgetCadastroPacienteInicio()),
-                    )
-                  },
+                  callback: () => {Navigator.pop(context)},
                 ),
               ],
             ),

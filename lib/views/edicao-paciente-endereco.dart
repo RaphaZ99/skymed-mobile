@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
+import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 import 'package:skymed_mobile/widgets/componentes/tema/circulos-topo.dart';
 
 class WidgetEdicaoPacienteEndereco extends StatefulWidget {
@@ -70,16 +71,7 @@ class _WidgetEdicaoPacienteEnderecoState
                   ),
                   callback: () => {Navigator.pop(context)},
                 ),
-                Botao(
-                  titulo: 'Voltar',
-                  margem: EdgeInsets.only(
-                    top: 15,
-                  ),
-                  corBorda: Colors.red,
-                  corInterna: Colors.white,
-                  corLetra: Colors.black,
-                  callback: () => {Navigator.pop(context)},
-                ),
+                BotaoVoltarPadrao(),
               ],
             ),
           ),

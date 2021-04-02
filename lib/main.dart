@@ -3,6 +3,7 @@ import 'package:skymed_mobile/views/cadastro-paciente-fim.dart';
 import 'package:skymed_mobile/views/cadastro-paciente-inicio.dart';
 import 'package:skymed_mobile/views/edicao-paciente-dados.dart';
 import 'package:skymed_mobile/views/edicao-paciente-endereco.dart';
+import 'package:skymed_mobile/views/historico-consultas.dart';
 import 'package:skymed_mobile/views/listagem-medicos.dart';
 import 'package:skymed_mobile/views/login.dart';
 import 'package:skymed_mobile/views/menu-usuario.dart';
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.EDICAO_PACIENTE_ENDERECO: (context) =>
             WidgetEdicaoPacienteEndereco(),
         AppRoutes.LISTAGEM_MEDICOS: (context) => WidgetListagemMedicos(),
-        AppRoutes.LOGIN: (context) => WidgetLogin()
+        AppRoutes.LOGIN: (context) => WidgetLogin(),
+        AppRoutes.HISTORICO_CONSULTAS: (context) => WidgetHistoricoConsultas()
       },
     );
   }

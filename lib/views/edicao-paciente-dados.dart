@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:skymed_mobile/views/login.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
 import 'package:skymed_mobile/widgets/componentes/tema/circulos-topo.dart';
-
-import 'cadastro-paciente-fim.dart';
 
 class WidgetEdicaoPacienteDados extends StatefulWidget {
   @override

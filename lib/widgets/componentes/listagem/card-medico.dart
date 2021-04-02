@@ -35,9 +35,9 @@ class CardMedico extends StatelessWidget {
           children: [
             Text(this.nomeEspecialidade),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(this.nomeHospital),
-                Text('   '),
                 Text(this.nomeCidade),
               ],
             )

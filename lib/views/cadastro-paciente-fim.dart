@@ -4,8 +4,6 @@ import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
 import 'package:skymed_mobile/widgets/componentes/tema/circulos-topo.dart';
 
-import 'cadastro-paciente-inicio.dart';
-
 class WidgetCadastroPacienteFim extends StatefulWidget {
   @override
   _WidgetCadastroPacienteFimState createState() =>
@@ -69,7 +67,9 @@ class _WidgetCadastroPacienteFimState extends State<WidgetCadastroPacienteFim> {
                   margem: EdgeInsets.only(
                     top: 40,
                   ),
-                  callback: () => {},
+                  callback: () {
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  },
                 ),
                 Botao(
                   titulo: 'Voltar',

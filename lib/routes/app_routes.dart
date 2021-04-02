@@ -12,4 +12,5 @@ class AppRoutes {
       '/recuperar-senha-paciente-nova-senha';
   static const LISTAGEM_MEDICOS = '/listagem-medicos';
   static const MENU_USUARIO = '/menu-usuario';
+  static const HISTORICO_CONSULTAS = '/historico-consultas';
 }

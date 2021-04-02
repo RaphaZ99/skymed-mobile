@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CardMedico extends StatelessWidget {
-  CardMedico(
+class CardConsulta extends StatelessWidget {
+  CardConsulta(
       {this.nomeMedico,
       this.nomeHospital,
       this.nomeCidade,
       this.nomeEspecialidade,
+      this.dataConsulta,
       this.imagem});
 
   final String nomeMedico;
@@ -14,6 +15,7 @@ class CardMedico extends StatelessWidget {
   final String nomeCidade;
   final String nomeEspecialidade;
   final Widget imagem;
+  final String dataConsulta;
 
   @override
   Widget build(BuildContext context) {
@@ -22,25 +24,31 @@ class CardMedico extends StatelessWidget {
         top: 25.0,
       ),
       child: ListTile(
-        leading: this.imagem ??
-            Image.asset(
-              'assets/images/icone-medico.png',
-              fit: BoxFit.contain,
-              height: 55,
-            ),
-        trailing: Icon(Icons.assignment, color: Colors.black),
-        title: Text(this.nomeMedico),
+        leading: Icon(
+          Icons.person_search_outlined,
+          size: 40.0,
+        ),
+        trailing: Icon(Icons.remove_circle_outline, color: Colors.red),
+        title: Text(
+          this.dataConsulta,
+          textAlign: TextAlign.center,
+        ),
         subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(this.nomeEspecialidade),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(this.nomeMedico),
+                Text(this.nomeEspecialidade),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(this.nomeHospital),
                 Text(this.nomeCidade),
               ],
-            )
+            ),
           ],
         ),
       ),

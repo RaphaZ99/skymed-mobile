@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/views/menu-usuario.dart';
 import 'logo.dart';
 
 class BarraTopo extends StatelessWidget implements PreferredSizeWidget {
@@ -17,7 +18,12 @@ class BarraTopo extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: Icon(Icons.menu),
           color: Colors.black,
-          onPressed: () => {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WidgetMenuUsuario()),
+            );
+          },
         ),
       ],
       backgroundColor: Colors.white,

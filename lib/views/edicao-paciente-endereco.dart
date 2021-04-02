@@ -4,8 +4,6 @@ import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
 import 'package:skymed_mobile/widgets/componentes/tema/circulos-topo.dart';
 
-import 'cadastro-paciente-inicio.dart';
-
 class WidgetEdicaoPacienteEndereco extends StatefulWidget {
   @override
   _WidgetEdicaoPacienteEnderecoState createState() =>

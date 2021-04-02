@@ -19,16 +19,13 @@ class _WidgetRecuperarSenhaPacienteIformarEmailState
         child: ListView(
           children: <Widget>[
             WidgetContainerInputTexto(
-               texto: "Recuperar Senha",
-               tamanhoDaLetra: 25.0,
+              texto: "Recuperar Senha",
+              tamanhoDaLetra: 25.0,
             ),
             Text(
               'Digite seu E-mail para enviarmos um código.',
               textAlign: TextAlign.center,
-              
-              style: TextStyle(height: 4,
-              fontSize: 18.0),
-              
+              style: TextStyle(height: 4, fontSize: 18.0),
             ),
             Campo(
               titulo: 'E-mail',
@@ -38,9 +35,9 @@ class _WidgetRecuperarSenhaPacienteIformarEmailState
             ),
             Botao(
               titulo: 'Próximo',
-              corBorda: Colors.blue,
-              corLetra: Colors.black,
-              corInterna: Colors.white,
+              corBorda: Colors.black,
+              corLetra: Colors.white,
+              corInterna: Colors.black,
               margem: EdgeInsets.only(top: 30),
               callback: () => Navigator.of(context).push(
                 MaterialPageRoute(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
-import 'item-modal.dart';
 
 class ModalFiltros extends StatelessWidget {
   @override

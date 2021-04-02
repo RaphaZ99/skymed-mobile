@@ -18,9 +18,9 @@ class _WidgetRecuperarSenhaPacienteCodigoState
         child: ListView(
           children: <Widget>[
             WidgetContainerInputTexto(
-               texto: "Recuperar Senha",
-               tamanhoDaLetra: 25.0,
-               alturaDoTexto: 2,
+              texto: "Recuperar Senha",
+              tamanhoDaLetra: 25.0,
+              alturaDoTexto: 2,
             ),
             Text(
               'Digite o código enviado para seu e-mail',
@@ -66,9 +66,9 @@ class _WidgetRecuperarSenhaPacienteCodigoState
             ),
             Botao(
               titulo: 'Próximo',
-              corInterna: Colors.white,
-              corBorda: Colors.blue,
-              corLetra: Colors.black,
+              corBorda: Colors.black,
+              corLetra: Colors.white,
+              corInterna: Colors.black,
               callback: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => WidgetRecuperarSenhaPacienteNovaSenha(),

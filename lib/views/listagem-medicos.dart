@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:skymed_mobile/views/cadastro-paciente-inicio.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/barra_topo.dart';
-import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
-import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
-import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
-import 'package:skymed_mobile/widgets/componentes/divisor/divisor.dart';
 import 'package:skymed_mobile/widgets/componentes/listagem/botao-filtro.dart';
 import 'package:skymed_mobile/widgets/componentes/listagem/card-medico.dart';
 import 'package:skymed_mobile/widgets/componentes/modal/modal-filtros.dart';
 import 'package:skymed_mobile/widgets/componentes/modal/modal-ordenacao.dart';
-import 'package:skymed_mobile/widgets/componentes/tema/circulos-topo.dart';
 
 class WidgetListagemMedicos extends StatefulWidget {
   @override

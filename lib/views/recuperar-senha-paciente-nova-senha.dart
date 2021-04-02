@@ -36,10 +36,12 @@ class _WidgetRecuperarSenhaPacienteNovaSenhaState
             ),
             Botao(
               titulo: 'Salvar',
-              corLetra: Colors.black,
-              corBorda: Colors.blue,
-              corInterna: Colors.white,
-              callback: () => Navigator.pop(context),
+              corBorda: Colors.black,
+              corLetra: Colors.white,
+              corInterna: Colors.black,
+              callback: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              },
             ),
           ],
         ),

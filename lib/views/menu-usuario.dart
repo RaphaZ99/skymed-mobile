@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:skymed_mobile/views/edicao-paciente-dados.dart';
 import 'package:skymed_mobile/views/edicao-paciente-endereco.dart';
+import 'package:skymed_mobile/views/historico-consultas.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/icone-campo.dart';
+import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 
 class WidgetMenuUsuario extends StatefulWidget {
   @override
@@ -44,7 +46,13 @@ class _WidgetMenuUsuario extends State<WidgetMenuUsuario> {
                 left: 15.0,
                 top: 30.0,
               ),
-              callback: () {},
+              callback: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WidgetHistoricoConsultas()),
+                );
+              },
             ),
             IconeCampo(
               titulo: 'Editar Cadastro',
@@ -99,15 +107,10 @@ class _WidgetMenuUsuario extends State<WidgetMenuUsuario> {
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
             ),
-            Botao(
-              titulo: 'Voltar',
+            BotaoVoltarPadrao(
               margem: EdgeInsets.only(
                 top: 225,
               ),
-              corBorda: Colors.red,
-              corInterna: Colors.white,
-              corLetra: Colors.black,
-              callback: () => {Navigator.pop(context)},
             ),
           ],
         ),

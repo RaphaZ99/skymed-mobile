@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-confirmacao.dart';
 
 class CardConsulta extends StatelessWidget {
   CardConsulta(
@@ -28,7 +29,15 @@ class CardConsulta extends StatelessWidget {
           Icons.person_search_outlined,
           size: 40.0,
         ),
-        trailing: Icon(Icons.remove_circle_outline, color: Colors.red),
+        trailing: GestureDetector(
+          child: Icon(Icons.remove_circle_outline, color: Colors.red),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) => ModalConfirmacao(),
+            );
+          },
+        ),
         title: Text(
           this.dataConsulta,
           textAlign: TextAlign.center,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/views/agendamento-consulta.dart';
 
 class CardMedico extends StatelessWidget {
   CardMedico(
@@ -28,7 +29,16 @@ class CardMedico extends StatelessWidget {
               fit: BoxFit.contain,
               height: 55,
             ),
-        trailing: Icon(Icons.assignment, color: Colors.black),
+        trailing: GestureDetector(
+          child: Icon(Icons.assignment, color: Colors.black),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => WidgetAgendamentoConsulta()),
+            );
+          },
+        ),
         title: Text(this.nomeMedico),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

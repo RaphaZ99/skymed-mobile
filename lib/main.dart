@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.CADASTRO_PACIENTE_INICIO: (context) =>
             WidgetCadastroPacienteInicio(),
         AppRoutes.CADASTRO_PACIENTE_FIM: (context) =>
-            WidgetCadastroPacienteFim(),
+            WidgetCadastroPacienteFormFim(),
         AppRoutes.EDICAO_PACIENTE_DADOS: (context) =>
             WidgetEdicaoPacienteDados(),
         AppRoutes.EDICAO_PACIENTE_ENDERECO: (context) =>

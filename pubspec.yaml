@@ -24,7 +24,12 @@ dependencies:
   table_calendar: ^2.3.3
   flutter:
     sdk: flutter
-  splashscreen:  
+  splashscreen: 
+  http: ^0.13.1 
+  mask_text_input_formatter: ^1.2.1
+  cpfcnpj: ^1.0.3
+  email_validator: ^2.0.1
+  brasil_fields: ^1.1.2
 
 
   # The following adds the Cupertino Icons font to your application.

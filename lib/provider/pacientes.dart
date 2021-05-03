@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:skymed_mobile/model/paciente.dart';
 
 class Pacientes with ChangeNotifier {
-  final _baseUrl = 'https://skymed-api.herokuapp.com/pessoa';
+  final _baseUrl = 'https://skymed-api.herokuapp.com';
 
   adicionarPaciente(Paciente paciente) {
-    http.post(Uri.parse('https://skymed-api.herokuapp.com/pessoa'),
+    http.post(Uri.parse('$_baseUrl/pessoa'),
         body: json.encode({
           "nome": paciente.nome,
           "cpf": paciente.cpf,

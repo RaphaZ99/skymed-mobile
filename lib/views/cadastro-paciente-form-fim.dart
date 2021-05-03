@@ -124,7 +124,7 @@ class _WidgetCadastroPacienteFimState
                           borderRadius: BorderRadius.circular(32.0),
                         ),
                       ),
-                      onSaved: (value) => _formData['Logradouro'] = value,
+                      onSaved: (value) => _formData['logradouro'] = value,
                       validator: (value) {
                         if (value.trim().isEmpty) {
                           return ('Logradouro não pode estar Vazio');

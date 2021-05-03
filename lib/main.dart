@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skymed_mobile/views/cadastro-paciente-fim.dart';
+import 'package:skymed_mobile/views/cadastro-paciente-form-fim.dart';
 import 'package:skymed_mobile/views/cadastro_paciente_form_inicio.dart';
 import 'package:skymed_mobile/views/edicao-paciente-dados.dart';
 import 'package:skymed_mobile/views/edicao-paciente-endereco.dart';

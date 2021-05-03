@@ -2,13 +2,14 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:skymed_mobile/model/paciente.dart';
 import 'package:skymed_mobile/provider/pacientes.dart';
-import 'package:skymed_mobile/views/cadastro-paciente-fim.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
 import 'package:email_validator/email_validator.dart';
+
+import 'cadastro-paciente-form-fim.dart';
 
 class WidgetCadastroPacienteInicio extends StatefulWidget {
   @override
@@ -50,7 +51,7 @@ class _WidgetCadastroPacienteInicioState
         context,
         MaterialPageRoute(
             builder: (context) =>
-                WidgetCadastroPacienteFim(novoPaciente: novoPaciente)));
+                WidgetCadastroPacienteFormFim(novoPaciente: novoPaciente)));
   }
 
   @override

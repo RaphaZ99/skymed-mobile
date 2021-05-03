@@ -9,16 +9,17 @@ import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
 import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 import 'package:skymed_mobile/widgets/componentes/tema/circulos-topo.dart';
 
-class WidgetCadastroPacienteFim extends StatefulWidget {
+class WidgetCadastroPacienteFormFim extends StatefulWidget {
   Paciente novoPaciente;
-  WidgetCadastroPacienteFim({this.novoPaciente});
+  WidgetCadastroPacienteFormFim({this.novoPaciente});
 
   @override
   _WidgetCadastroPacienteFimState createState() =>
       _WidgetCadastroPacienteFimState();
 }
 
-class _WidgetCadastroPacienteFimState extends State<WidgetCadastroPacienteFim> {
+class _WidgetCadastroPacienteFimState
+    extends State<WidgetCadastroPacienteFormFim> {
   final postData = Pacientes();
   final _formData = Map<String, Object>();
   final _form = GlobalKey<FormState>();
@@ -123,7 +124,7 @@ class _WidgetCadastroPacienteFimState extends State<WidgetCadastroPacienteFim> {
                           borderRadius: BorderRadius.circular(32.0),
                         ),
                       ),
-                      onSaved: (value) => _formData['logradouro'] = value,
+                      onSaved: (value) => _formData['Logradouro'] = value,
                       validator: (value) {
                         if (value.trim().isEmpty) {
                           return ('Logradouro não pode estar Vazio');

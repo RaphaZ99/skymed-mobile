@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skymed_mobile/views/cadastro-paciente-fim.dart';
-import 'package:skymed_mobile/views/cadastro-paciente-inicio.dart';
+import 'package:skymed_mobile/views/cadastro-paciente-form-fim.dart';
+import 'package:skymed_mobile/views/cadastro_paciente_form_inicio.dart';
 import 'package:skymed_mobile/views/edicao-paciente-dados.dart';
 import 'package:skymed_mobile/views/edicao-paciente-endereco.dart';
 import 'package:skymed_mobile/views/historico-consultas.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.CADASTRO_PACIENTE_INICIO: (context) =>
             WidgetCadastroPacienteInicio(),
         AppRoutes.CADASTRO_PACIENTE_FIM: (context) =>
-            WidgetCadastroPacienteFim(),
+            WidgetCadastroPacienteFormFim(),
         AppRoutes.EDICAO_PACIENTE_DADOS: (context) =>
             WidgetEdicaoPacienteDados(),
         AppRoutes.EDICAO_PACIENTE_ENDERECO: (context) =>

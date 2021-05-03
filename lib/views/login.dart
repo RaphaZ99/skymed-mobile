@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skymed_mobile/views/cadastro-paciente-inicio.dart';
+import 'package:skymed_mobile/views/cadastro_paciente_form_inicio.dart';
 import 'package:skymed_mobile/views/recuperar-senha-paciente-informar-email.dart';
 import 'package:skymed_mobile/views/listagem-medicos.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';

@@ -13,6 +13,7 @@ class Campo extends StatelessWidget {
     return Card(
       child: ListTile(
         title: TextField(
+          textInputAction: TextInputAction.next,
           obscureText: ehSenha ?? false,
           decoration: InputDecoration(
             labelText: titulo,

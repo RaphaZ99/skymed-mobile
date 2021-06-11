@@ -3,11 +3,10 @@ import 'package:skymed_mobile/model/endereco.dart';
 import 'package:skymed_mobile/model/paciente.dart';
 import 'package:skymed_mobile/model/usuario.dart';
 import 'package:skymed_mobile/provider/pacientes.dart';
+import 'package:skymed_mobile/views/cadastro-paciente-form-dados_senha.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
-import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
 import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
-import 'package:skymed_mobile/widgets/componentes/tema/circulos-topo.dart';
 
 class WidgetCadastroPacienteFormFim extends StatefulWidget {
   Paciente novoPaciente;
@@ -46,15 +45,16 @@ class _WidgetCadastroPacienteFimState
         ehHospital: false,
         ehMedico: false,
         ehPaciente: true,
-        email: widget.novoPaciente.email,
-        senha: '1234');
+        email: widget.novoPaciente.email);
 
     widget.novoPaciente.endereco = novoEndereco;
     widget.novoPaciente.usuario = novoUsuario;
 
-    postData.adicionarPaciente(widget.novoPaciente);
-
-    Navigator.of(context).popUntil((route) => route.isFirst);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => WidgetCadastroPacienteFormSenha(
+                novoPaciente: widget.novoPaciente)));
   }
 
   @override

@@ -1,5 +1,5 @@
 class AppRoutes {
-  static const LOGIN = '/login';
+  //static const LOGIN = '/login';
   static const CADASTRO_PACIENTE_INICIO = '/cadastro-paciente-inicio';
   static const CADASTRO_PACIENTE_FIM = '/cadastro-paciente-fim';
   static const EDICAO_PACIENTE_DADOS = '/edicao-paciente-dados';
@@ -13,4 +13,5 @@ class AppRoutes {
   static const LISTAGEM_MEDICOS = '/listagem-medicos';
   static const MENU_USUARIO = '/menu-usuario';
   static const HISTORICO_CONSULTAS = '/historico-consultas';
+  static const AUTH_HOME = '/login';
 }

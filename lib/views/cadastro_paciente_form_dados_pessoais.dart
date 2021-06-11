@@ -1,4 +1,3 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:skymed_mobile/model/paciente.dart';
 import 'package:skymed_mobile/provider/pacientes.dart';
@@ -9,7 +8,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:cpfcnpj/cpfcnpj.dart';
 import 'package:email_validator/email_validator.dart';
 
-import 'cadastro-paciente-form-fim.dart';
+import 'cadastro-paciente-form_dados_endereco.dart';
 
 class WidgetCadastroPacienteInicio extends StatefulWidget {
   @override
@@ -44,6 +43,7 @@ class _WidgetCadastroPacienteInicioState
         email: _formData['email'],
         rg: _formData['rg'],
         telefone: _formData['telefone'],
+        origemPaciente: "mobile",
         endereco: null,
         usuario: null);
 
@@ -211,6 +211,7 @@ class _WidgetCadastroPacienteInicioState
                         ),
                       ),
                       onSaved: (value) => _formData['telefone'] = value,
+                      // ignore: missing_return
                       validator: (value) {
                         if (value.trim().isEmpty || value.length < 11) {
                           return ('O telefone não pode ser vazio e deve conter mais que 11 caracteres');

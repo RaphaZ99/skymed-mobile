@@ -200,8 +200,6 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
   }
 
   Widget _buildButtons() {
-    final dateTime = _events.keys.elementAt(_events.length - 2);
-
     return Column(
       children: <Widget>[
         Botao(

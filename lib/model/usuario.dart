@@ -1,11 +1,11 @@
 class Usuario {
-  final bool ehPaciente;
-  final bool ehAdmin;
-  final bool ehHospital;
-  final bool ehMedico;
-  final bool ehAutenticado;
-  final String email;
-  final String senha;
+  bool ehPaciente;
+  bool ehAdmin;
+  bool ehHospital;
+  bool ehMedico;
+  bool ehAutenticado;
+  String email;
+  String senha;
 
   Usuario(
       {this.ehAdmin,

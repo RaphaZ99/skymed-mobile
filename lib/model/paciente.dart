@@ -9,6 +9,7 @@ class Paciente {
   final String rg;
   final String email;
   final String telefone;
+  final String origemPaciente;
   Endereco endereco;
   Usuario usuario;
 
@@ -21,5 +22,6 @@ class Paciente {
     @required this.telefone,
     @required this.endereco,
     @required this.usuario,
+    @required this.origemPaciente,
   });
 }

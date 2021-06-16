@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/provider/base_http.dart';
 import 'package:skymed_mobile/views/edicao-paciente-dados.dart';
 import 'package:skymed_mobile/views/edicao-paciente-endereco.dart';
 import 'package:skymed_mobile/views/historico-consultas.dart';
@@ -123,6 +124,7 @@ class _WidgetMenuUsuario extends State<WidgetMenuUsuario> {
                 top: 30.0,
               ),
               callback: () {
+                BaseHttp.tokenJWT = "";
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
             ),

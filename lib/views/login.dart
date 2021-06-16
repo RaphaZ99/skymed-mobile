@@ -25,7 +25,7 @@ Future<void> _login(context) async {
     await _postLogin.authenticate(
         _formData['senha'], _formData['email'], context);
 
-    if (BaseHttp.usuarioLogado) {
+    if (BaseHttp.estaLogado()) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => WidgetListagemMedicos()));
     }
@@ -93,7 +93,7 @@ class _WidgetLoginState extends State<WidgetLogin> {
                     title: TextFormField(
                       //inputFormatters: [mascaraCpf],
                       textInputAction: TextInputAction.next,
-                      obscureText: false,
+                      obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Senha',
                         floatingLabelBehavior: FloatingLabelBehavior.auto,

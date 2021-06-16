@@ -12,7 +12,10 @@ class BaseHttp with ChangeNotifier {
     'Token': tokenJWT,
   };
   static String tokenJWT = "";
-  static bool usuarioLogado = tokenJWT != "";
+
+  static bool estaLogado() {
+    return tokenJWT != "";
+  }
 
   Future<http.Response> postPadrao(Object body, Uri url) async {
     return await post(body, headerPadrao, url);
@@ -24,6 +27,8 @@ class BaseHttp with ChangeNotifier {
 
   Future<http.Response> post(
       Object body, Map<String, String> headers, Uri url) async {
+    http.Response resposta = null;
+
     await http
         .post(
       url,
@@ -31,10 +36,10 @@ class BaseHttp with ChangeNotifier {
       headers: headers,
     )
         .then((value) {
-      return value;
+      resposta = value;
     });
 
     notifyListeners();
-    return Future.value();
+    return resposta;
   }
 }

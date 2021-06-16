@@ -6,6 +6,6 @@ import 'package:skymed_mobile/views/login.dart';
 class AuthOrHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseHttp.usuarioLogado ? WidgetListagemMedicos() : WidgetLogin();
+    return BaseHttp.estaLogado() ? WidgetListagemMedicos() : WidgetLogin();
   }
 }

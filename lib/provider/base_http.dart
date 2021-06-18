@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class BaseHttp with ChangeNotifier {
+  static final baseUrl = 'https://skymed-api.herokuapp.com';
   final Map<String, String> headerPadrao = {
     'Content-type': 'application/json',
     'Accept': 'application/json',

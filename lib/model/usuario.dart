@@ -15,4 +15,16 @@ class Usuario {
       this.ehPaciente,
       this.email,
       this.senha});
+
+  factory Usuario.fromJson(Map<String, dynamic> json) {
+    return Usuario(
+      ehAdmin: json['ehAdmin'],
+      ehAutenticado: json['ehAutenticado'],
+      ehHospital: json['ehHospital'],
+      ehMedico: json['ehMedico'],
+      ehPaciente: json['ehPaciente'],
+      email: json['email'],
+      senha: json['senha'],
+    );
+  }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'paciente.dart';
 
 class Hospital {
-  final String id;
+  final int id;
   Paciente pessoa;
   final String cnpj;
   final String razaoSocial;
@@ -14,4 +14,13 @@ class Hospital {
     @required this.cnpj,
     @required this.razaoSocial,
   });
+
+  factory Hospital.fromJson(Map<String, dynamic> json) {
+    return Hospital(
+      id: json['id'],
+      pessoa: Paciente.fromJson(json['pessoa']),
+      cnpj: json['cnpj'],
+      razaoSocial: json['razaoSocial'],
+    );
+  }
 }

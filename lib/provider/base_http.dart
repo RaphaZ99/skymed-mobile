@@ -42,4 +42,80 @@ class BaseHttp with ChangeNotifier {
     notifyListeners();
     return resposta;
   }
+
+  Future<http.Response> putPadrao(Object body, Uri url) async {
+    return await put(body, headerPadrao, url);
+  }
+
+  Future<http.Response> putAutenticado(Object body, Uri url) async {
+    return await put(body, headerAutenticado, url);
+  }
+
+  Future<http.Response> put(
+      Object body, Map<String, String> headers, Uri url) async {
+    http.Response resposta = null;
+
+    await http
+        .put(
+      url,
+      body: body,
+      headers: headers,
+    )
+        .then((value) {
+      resposta = value;
+    });
+
+    notifyListeners();
+    return resposta;
+  }
+
+  Future<http.Response> deletePadrao(Object body, Uri url) async {
+    return await post(body, headerPadrao, url);
+  }
+
+  Future<http.Response> deleteAutenticado(Object body, Uri url) async {
+    return await post(body, headerAutenticado, url);
+  }
+
+  Future<http.Response> delete(
+      Object body, Map<String, String> headers, Uri url) async {
+    http.Response resposta = null;
+
+    await http
+        .delete(
+      url,
+      body: body,
+      headers: headers,
+    )
+        .then((value) {
+      resposta = value;
+    });
+
+    notifyListeners();
+    return resposta;
+  }
+
+  Future<http.Response> getPadrao(Uri url) async {
+    return await get(headerPadrao, url);
+  }
+
+  Future<http.Response> getAutenticado(Uri url) async {
+    return await get(headerAutenticado, url);
+  }
+
+  Future<http.Response> get(Map<String, String> headers, Uri url) async {
+    http.Response resposta = null;
+
+    await http
+        .post(
+      url,
+      headers: headers,
+    )
+        .then((value) {
+      resposta = value;
+    });
+
+    notifyListeners();
+    return resposta;
+  }
 }

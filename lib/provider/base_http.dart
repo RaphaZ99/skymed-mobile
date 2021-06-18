@@ -1,17 +1,22 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class BaseHttp with ChangeNotifier {
-  static final baseUrl = 'https://skymed-api.herokuapp.com';
   final Map<String, String> headerPadrao = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
   };
-  final Map<String, String> headerAutenticado = {
-    'Content-type': 'application/json',
-    'Accept': 'application/json',
-    'Token': tokenJWT,
-  };
+  Map<String, String> getHeaderAutenticado() {
+    return {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      HttpHeaders.authorizationHeader: 'Bearer $tokenJWT',
+    };
+  }
+
+  static final baseUrl = 'https://skymed-api.herokuapp.com';
   static String tokenJWT = "";
 
   static bool estaLogado() {
@@ -23,7 +28,7 @@ class BaseHttp with ChangeNotifier {
   }
 
   Future<http.Response> postAutenticado(Object body, Uri url) async {
-    return await post(body, headerAutenticado, url);
+    return await post(body, getHeaderAutenticado(), url);
   }
 
   Future<http.Response> post(
@@ -49,7 +54,7 @@ class BaseHttp with ChangeNotifier {
   }
 
   Future<http.Response> putAutenticado(Object body, Uri url) async {
-    return await put(body, headerAutenticado, url);
+    return await put(body, getHeaderAutenticado(), url);
   }
 
   Future<http.Response> put(
@@ -75,7 +80,7 @@ class BaseHttp with ChangeNotifier {
   }
 
   Future<http.Response> deleteAutenticado(Object body, Uri url) async {
-    return await post(body, headerAutenticado, url);
+    return await post(body, getHeaderAutenticado(), url);
   }
 
   Future<http.Response> delete(
@@ -101,14 +106,14 @@ class BaseHttp with ChangeNotifier {
   }
 
   Future<http.Response> getAutenticado(Uri url) async {
-    return await get(headerAutenticado, url);
+    return await get(getHeaderAutenticado(), url);
   }
 
   Future<http.Response> get(Map<String, String> headers, Uri url) async {
     http.Response resposta = null;
 
     await http
-        .post(
+        .get(
       url,
       headers: headers,
     )

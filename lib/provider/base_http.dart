@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:skymed_mobile/model/paciente.dart';
 
 class BaseHttp with ChangeNotifier {
   final Map<String, String> headerPadrao = {
@@ -18,6 +19,7 @@ class BaseHttp with ChangeNotifier {
 
   static final baseUrl = 'https://skymed-api.herokuapp.com';
   static String tokenJWT = "";
+  static String usuarioEmail = "";
 
   static bool estaLogado() {
     return tokenJWT != "";

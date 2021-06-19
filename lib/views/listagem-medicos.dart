@@ -82,6 +82,8 @@ class _WidgetListagemMedicosState extends State<WidgetListagemMedicos> {
                   ),
                   ListView.builder(
                     itemCount: medicos.data.length,
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return CardMedico(
                           nomeCidade:

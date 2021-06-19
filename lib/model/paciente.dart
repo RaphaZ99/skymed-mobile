@@ -3,13 +3,13 @@ import 'package:skymed_mobile/model/endereco.dart';
 import 'package:skymed_mobile/model/usuario.dart';
 
 class Paciente {
-  final int id;
-  final String nome;
-  final String cpf;
-  final String rg;
-  final String email;
-  final String telefone;
-  final String origemPaciente;
+  int id;
+  String nome;
+  String cpf;
+  String rg;
+  String email;
+  String telefone;
+  String origemPaciente;
   Endereco endereco;
   Usuario usuario;
 

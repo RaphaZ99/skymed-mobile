@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:skymed_mobile/model/especialidade.dart';
-import 'package:skymed_mobile/model/hospital.dart';
 import 'package:skymed_mobile/model/paciente.dart';
 
 class Medico {

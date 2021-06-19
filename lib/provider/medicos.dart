@@ -12,7 +12,7 @@ class Medicos with ChangeNotifier {
     final resposta =
         await _baseHttp.getPadrao(Uri.parse('${BaseHttp.baseUrl}/medico'));
 
-    return compute(convertaMedicos, resposta.body);
+    return convertaMedicos(resposta.body);
   }
 
   List<Medico> convertaMedicos(String body) {

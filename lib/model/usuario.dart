@@ -1,4 +1,5 @@
 class Usuario {
+  int id;
   bool ehPaciente;
   bool ehAdmin;
   bool ehHospital;
@@ -8,7 +9,8 @@ class Usuario {
   String senha;
 
   Usuario(
-      {this.ehAdmin,
+      {this.id,
+      this.ehAdmin,
       this.ehAutenticado,
       this.ehHospital,
       this.ehMedico,
@@ -18,6 +20,7 @@ class Usuario {
 
   factory Usuario.fromJson(Map<String, dynamic> json) {
     return Usuario(
+      id: json['id'],
       ehAdmin: json['ehAdmin'],
       ehAutenticado: json['ehAutenticado'],
       ehHospital: json['ehHospital'],

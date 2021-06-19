@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/model/dto_filtros_medico.dart';
 import 'package:skymed_mobile/model/medico.dart';
 import 'package:skymed_mobile/provider/medicos.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/barra_topo.dart';
@@ -18,7 +19,7 @@ class _WidgetListagemMedicosState extends State<WidgetListagemMedicos> {
   @override
   void initState() {
     super.initState();
-    futureMedico = new Medicos().obtenhaMedicos();
+    futureMedico = new Medicos().obtenhaMedicos(null);
   }
 
   @override
@@ -59,7 +60,14 @@ class _WidgetListagemMedicosState extends State<WidgetListagemMedicos> {
                             showDialog(
                               context: context,
                               builder: (context) => ModalOrdenacao(),
-                            );
+                            ).then((value) => setState(() {
+                                  if (value != null) {
+                                    var filtros =
+                                        new DTOFiltrosMedico(ordem: value);
+                                    futureMedico =
+                                        new Medicos().obtenhaMedicos(filtros);
+                                  }
+                                }));
                           },
                         ),
                         margin: EdgeInsets.only(
@@ -74,7 +82,10 @@ class _WidgetListagemMedicosState extends State<WidgetListagemMedicos> {
                             showDialog(
                               context: context,
                               builder: (context) => ModalFiltros(),
-                            );
+                            ).then((value) => setState(() {
+                                  futureMedico =
+                                      new Medicos().obtenhaMedicos(value);
+                                }));
                           },
                         ),
                       ),

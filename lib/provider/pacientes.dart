@@ -4,7 +4,6 @@ import 'package:skymed_mobile/model/paciente.dart';
 import 'package:skymed_mobile/provider/base_http.dart';
 
 class Pacientes with ChangeNotifier {
-  final _baseUrl = 'https://skymed-api.herokuapp.com';
   final _baseHttp = new BaseHttp();
 
   Future<void> authenticate(String senha, String email, context) async {
@@ -16,7 +15,7 @@ class Pacientes with ChangeNotifier {
     );
 
     await _baseHttp
-        .postPadrao(body, Uri.parse('$_baseUrl/login'))
+        .postPadrao(body, Uri.parse('${BaseHttp.baseUrl}/login'))
         .then((value) {
       final responseBody = json.decode(value.body);
 
@@ -54,7 +53,7 @@ class Pacientes with ChangeNotifier {
     });
 
     await _baseHttp
-        .postPadrao(body, Uri.parse('$_baseUrl/pessoa'))
+        .postPadrao(body, Uri.parse('${BaseHttp.baseUrl}/pessoa'))
         .then((value) {
       return value.statusCode;
     });

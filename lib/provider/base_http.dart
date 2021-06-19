@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -6,11 +8,15 @@ class BaseHttp with ChangeNotifier {
     'Content-type': 'application/json',
     'Accept': 'application/json',
   };
-  final Map<String, String> headerAutenticado = {
-    'Content-type': 'application/json',
-    'Accept': 'application/json',
-    'Token': tokenJWT,
-  };
+  Map<String, String> getHeaderAutenticado() {
+    return {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      HttpHeaders.authorizationHeader: 'Bearer $tokenJWT',
+    };
+  }
+
+  static final baseUrl = 'https://skymed-api.herokuapp.com';
   static String tokenJWT = "";
 
   static bool estaLogado() {
@@ -22,7 +28,7 @@ class BaseHttp with ChangeNotifier {
   }
 
   Future<http.Response> postAutenticado(Object body, Uri url) async {
-    return await post(body, headerAutenticado, url);
+    return await post(body, getHeaderAutenticado(), url);
   }
 
   Future<http.Response> post(
@@ -33,6 +39,82 @@ class BaseHttp with ChangeNotifier {
         .post(
       url,
       body: body,
+      headers: headers,
+    )
+        .then((value) {
+      resposta = value;
+    });
+
+    notifyListeners();
+    return resposta;
+  }
+
+  Future<http.Response> putPadrao(Object body, Uri url) async {
+    return await put(body, headerPadrao, url);
+  }
+
+  Future<http.Response> putAutenticado(Object body, Uri url) async {
+    return await put(body, getHeaderAutenticado(), url);
+  }
+
+  Future<http.Response> put(
+      Object body, Map<String, String> headers, Uri url) async {
+    http.Response resposta = null;
+
+    await http
+        .put(
+      url,
+      body: body,
+      headers: headers,
+    )
+        .then((value) {
+      resposta = value;
+    });
+
+    notifyListeners();
+    return resposta;
+  }
+
+  Future<http.Response> deletePadrao(Object body, Uri url) async {
+    return await post(body, headerPadrao, url);
+  }
+
+  Future<http.Response> deleteAutenticado(Object body, Uri url) async {
+    return await post(body, getHeaderAutenticado(), url);
+  }
+
+  Future<http.Response> delete(
+      Object body, Map<String, String> headers, Uri url) async {
+    http.Response resposta = null;
+
+    await http
+        .delete(
+      url,
+      body: body,
+      headers: headers,
+    )
+        .then((value) {
+      resposta = value;
+    });
+
+    notifyListeners();
+    return resposta;
+  }
+
+  Future<http.Response> getPadrao(Uri url) async {
+    return await get(headerPadrao, url);
+  }
+
+  Future<http.Response> getAutenticado(Uri url) async {
+    return await get(getHeaderAutenticado(), url);
+  }
+
+  Future<http.Response> get(Map<String, String> headers, Uri url) async {
+    http.Response resposta = null;
+
+    await http
+        .get(
+      url,
       headers: headers,
     )
         .then((value) {

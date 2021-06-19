@@ -3,7 +3,7 @@ import 'package:skymed_mobile/model/endereco.dart';
 import 'package:skymed_mobile/model/usuario.dart';
 
 class Paciente {
-  final String id;
+  final int id;
   final String nome;
   final String cpf;
   final String rg;
@@ -24,4 +24,19 @@ class Paciente {
     @required this.usuario,
     @required this.origemPaciente,
   });
+
+  factory Paciente.fromJson(Map<String, dynamic> json) {
+    return Paciente(
+      id: json['id'],
+      nome: json['nome'],
+      cpf: json['cpf'],
+      email: json['email'],
+      rg: json['rg'],
+      telefone: json['telefone'],
+      origemPaciente: json['origemPaciente'],
+      endereco:
+          json['endereco'] != null ? Endereco.fromJson(json['endereco']) : null,
+      usuario: Usuario.fromJson(json['usuario']),
+    );
+  }
 }

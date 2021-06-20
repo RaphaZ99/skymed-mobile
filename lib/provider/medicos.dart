@@ -9,6 +9,14 @@ import 'package:skymed_mobile/provider/base_http.dart';
 class Medicos with ChangeNotifier {
   final _baseHttp = new BaseHttp();
 
+  Future<bool> agendeConsulta(Medico medico) async {
+    final medicoJson = jsonEncode(medico);
+    final resposta = await _baseHttp.putAutenticado(
+        medicoJson, Uri.parse('${BaseHttp.baseUrl}/medico'));
+
+    return resposta.statusCode == 200;
+  }
+
   Future<List<Medico>> obtenhaMedicos(DTOFiltrosMedico filtros) async {
     final resposta =
         await _baseHttp.getPadrao(Uri.parse('${BaseHttp.baseUrl}/medico'));

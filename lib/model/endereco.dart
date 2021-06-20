@@ -32,4 +32,18 @@ class Endereco {
         uf: json['uf'],
         ibge: json['ibge']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (this.id != null) 'id': this.id,
+      'bairro': bairro,
+      'cep': cep,
+      'complemento': complemento,
+      'logradouro': logradouro,
+      'numero': numero,
+      'localidade': localidade,
+      'uf': uf,
+      'ibge': ibge,
+    };
+  }
 }

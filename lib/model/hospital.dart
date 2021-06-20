@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 import 'paciente.dart';
@@ -22,5 +24,14 @@ class Hospital {
       cnpj: json['cnpj'],
       razaoSocial: json['razaoSocial'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (this.id != null) 'id': this.id,
+      'cnpj': cnpj,
+      'razaoSocial': razaoSocial,
+      'pessoa': this.pessoa,
+    };
   }
 }

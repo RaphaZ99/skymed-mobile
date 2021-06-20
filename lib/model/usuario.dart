@@ -30,4 +30,17 @@ class Usuario {
       senha: json['senha'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (this.id != null) 'id': this.id,
+      'ehAdmin': ehAdmin,
+      'ehAutenticado': ehAutenticado,
+      'ehHospital': ehHospital,
+      'ehMedico': ehMedico,
+      'ehPaciente': ehPaciente,
+      'email': email,
+      'senha': senha,
+    };
+  }
 }

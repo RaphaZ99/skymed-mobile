@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/model/dto_filtros_medico.dart';
 import 'item-modal.dart';
 
 class ModalOrdenacao extends StatelessWidget {
@@ -12,7 +13,7 @@ class ModalOrdenacao extends StatelessWidget {
           color: Colors.black,
           text: 'Nome do médico',
           onPressed: () {
-            Navigator.pop(context, 'nome-medico');
+            Navigator.pop(context, OrdemMedicos.nomeMedico);
           },
         ),
         ItemModal(
@@ -20,7 +21,7 @@ class ModalOrdenacao extends StatelessWidget {
           color: Colors.black,
           text: 'Especialidade',
           onPressed: () {
-            Navigator.pop(context, 'especialidade');
+            Navigator.pop(context, OrdemMedicos.especialidade);
           },
         ),
         ItemModal(
@@ -28,7 +29,7 @@ class ModalOrdenacao extends StatelessWidget {
           color: Colors.black,
           text: 'Hospital/Clínica',
           onPressed: () {
-            Navigator.pop(context, 'hospital');
+            Navigator.pop(context, OrdemMedicos.hospital);
           },
         ),
         ItemModal(
@@ -36,7 +37,7 @@ class ModalOrdenacao extends StatelessWidget {
           color: Colors.black,
           text: 'Cidade',
           onPressed: () {
-            Navigator.pop(context, 'cidade');
+            Navigator.pop(context, OrdemMedicos.cidade);
           },
         ),
       ],

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:skymed_mobile/model/endereco.dart';
 import 'package:skymed_mobile/model/usuario.dart';
@@ -38,5 +40,19 @@ class Paciente {
           json['endereco'] != null ? Endereco.fromJson(json['endereco']) : null,
       usuario: Usuario.fromJson(json['usuario']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (this.id != null) 'id': this.id,
+      'nome': nome,
+      'cpf': cpf,
+      'email': email,
+      'rg': rg,
+      'telefone': telefone,
+      'origemPaciente': origemPaciente,
+      'endereco': this.endereco,
+      'usuario': this.usuario,
+    };
   }
 }

@@ -96,14 +96,7 @@ class _WidgetListagemMedicosState extends State<WidgetListagemMedicos> {
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return CardMedico(
-                          nomeCidade:
-                              'Cidade-UF', //'${medicos[index].hospital.pessoa.endereco.localidade}-${medicos[index].hospital.pessoa.endereco.uf}',
-                          nomeEspecialidade:
-                              medicos.data[index].especialidade.nome,
-                          nomeHospital:
-                              'HospitalName', //medicos[index].hospital.razaoSocial,
-                          nomeMedico: medicos.data[index].pessoa.nome);
+                      return CardMedico(medicos.data[index]);
                     },
                   ),
                 ],

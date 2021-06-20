@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/model/horario_consulta.dart';
+import 'package:skymed_mobile/model/medico.dart';
+import 'package:skymed_mobile/provider/medicos.dart';
+import 'package:skymed_mobile/provider/pacientes.dart';
+import 'package:skymed_mobile/views/historico-consultas.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/barra_topo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/modal/modal-consulta.dart';
@@ -13,10 +18,12 @@ final Map<DateTime, List> _holidays = {
 };
 
 class WidgetAgendamentoConsulta extends StatefulWidget {
-  WidgetAgendamentoConsulta({Key key}) : super(key: key);
+  WidgetAgendamentoConsulta(this.medico, {Key key}) : super(key: key);
+
+  final Medico medico;
 
   @override
-  _AgendamentoConsultaState createState() => _AgendamentoConsultaState();
+  _AgendamentoConsultaState createState() => _AgendamentoConsultaState(medico);
 }
 
 class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
@@ -25,89 +32,15 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
   List _selectedEvents;
   AnimationController _animationController;
   CalendarController _calendarController;
+  final Medico medico;
+
+  _AgendamentoConsultaState(this.medico);
 
   @override
   void initState() {
     super.initState();
-    final _selectedDay = DateTime.now();
 
-    _events = {
-      _selectedDay.subtract(Duration(days: 30)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3'
-      ],
-      _selectedDay.subtract(Duration(days: 27)): [
-        'Consulta XPTO',
-      ],
-      _selectedDay.subtract(Duration(days: 20)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3',
-        'Consulta XPTO 4'
-      ],
-      _selectedDay.subtract(Duration(days: 16)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-      ],
-      _selectedDay.subtract(Duration(days: 10)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3'
-      ],
-      _selectedDay.subtract(Duration(days: 4)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3'
-      ],
-      _selectedDay.subtract(Duration(days: 2)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-      ],
-      _selectedDay: [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3',
-        'Consulta XPTO 4'
-      ],
-      _selectedDay.add(Duration(days: 1)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3',
-        'Consulta XPTO 4'
-      ],
-      _selectedDay.add(Duration(days: 3)): Set.from([
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3',
-      ]).toList(),
-      _selectedDay.add(Duration(days: 7)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3'
-      ],
-      _selectedDay.add(Duration(days: 11)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2'
-      ],
-      _selectedDay.add(Duration(days: 17)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3',
-        'Consulta XPTO 4'
-      ],
-      _selectedDay.add(Duration(days: 22)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2'
-      ],
-      _selectedDay.add(Duration(days: 26)): [
-        'Consulta XPTO',
-        'Consulta XPTO 2',
-        'Consulta XPTO 3'
-      ],
-    };
-
-    _selectedEvents = _events[_selectedDay] ?? [];
+    _selectedEvents = [];
     _calendarController = CalendarController();
 
     _animationController = AnimationController(
@@ -125,11 +58,12 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
     super.dispose();
   }
 
-  void _onDaySelected(DateTime day, List events, List holidays) {
-    print('CALLBACK: _onDaySelected');
-    setState(() {
-      _selectedEvents = events;
-    });
+  void _onDaySelected(DateTime day, List events, List holidays) {}
+
+  int convertaDiaSemana(int dia) {
+    if (dia == 0) return 7;
+
+    return dia - 1;
   }
 
   void _onVisibleDaysChanged(
@@ -212,14 +146,100 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
           ),
           width: 0.8,
           callback: () {
-            showDialog(
+            if (!medico.horariosTrabalho.any((h) =>
+                convertaDiaSemana(h.diaDaSemana) ==
+                _calendarController.selectedDay.weekday)) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return SimpleDialog(
+                    title: Text('O médico não trabalha nesse dia da semana!'),
+                  );
+                },
+              );
+
+              return;
+            }
+
+            showTimePicker(
               context: context,
-              builder: (context) => ModalConsulta(),
+              initialTime: TimeOfDay.now(),
+            ).then(
+              (horarioEscolhido) {
+                if (horarioEscolhido != null) {
+                  var horarioInicial = TimeOfDay.fromDateTime(
+                      medico.horariosTrabalho.first.inicio);
+                  var horarioFinal =
+                      TimeOfDay.fromDateTime(medico.horariosTrabalho.first.fim);
+
+                  if (!isBetween(
+                      horarioEscolhido, horarioInicial, horarioFinal)) {
+                    return SimpleDialog(
+                      title: Text(
+                          'O médico apenas trabalha das ${horarioInicial.format(context)} às ${horarioFinal.format(context)}!'),
+                    );
+                  }
+
+                  if (medico.horariosConsulta.any((h) => isBetween(
+                      horarioEscolhido,
+                      TimeOfDay.fromDateTime(h.inicio),
+                      TimeOfDay.fromDateTime(h.fim)))) {
+                    return SimpleDialog(
+                      title: Text(
+                          'O médico já possui uma consulta nesse horário!'),
+                    );
+                  }
+
+                  Pacientes().obterPaciente().then((pacienteLogado) {
+                    var inicio = DateTime(
+                        _calendarController.selectedDay.year,
+                        _calendarController.selectedDay.month,
+                        _calendarController.selectedDay.day,
+                        horarioEscolhido.hour,
+                        horarioEscolhido.minute);
+                    var fim = inicio.add(Duration(
+                        hours: medico.especialidade.duracaoConsulta.hour,
+                        minutes: medico.especialidade.duracaoConsulta.minute));
+                    var agendamento = HorarioConsulta(
+                      paciente: pacienteLogado,
+                      inicio: inicio,
+                      fim: fim,
+                    );
+
+                    medico.horariosConsulta.add(agendamento);
+
+                    Medicos().agendeConsulta(medico).then(
+                      (deuCerto) {
+                        if (!deuCerto) {
+                          medico.horariosConsulta.removeLast();
+
+                          return SimpleDialog(
+                            title: Text('Ocorreu um erro ao agendar!'),
+                          );
+                        }
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WidgetHistoricoConsultas()),
+                        );
+                      },
+                    );
+                  });
+                }
+              },
             );
           },
         ),
       ],
     );
+  }
+
+  double toDouble(TimeOfDay myTime) => myTime.hour + myTime.minute / 60.0;
+
+  bool isBetween(TimeOfDay day, TimeOfDay first, TimeOfDay second) {
+    return toDouble(first) <= toDouble(day) &&
+        toDouble(day) <= toDouble(second);
   }
 
   Widget _buildEventList() {

@@ -1,22 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skymed_mobile/model/dto_consultaComMedico.dart';
+import 'package:skymed_mobile/provider/medicos.dart';
 import 'package:skymed_mobile/widgets/componentes/modal/modal-confirmacao.dart';
+import 'package:intl/intl.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-erro.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-sucesso.dart';
 
 class CardConsulta extends StatelessWidget {
-  CardConsulta(
-      {this.nomeMedico,
-      this.nomeHospital,
-      this.nomeCidade,
-      this.nomeEspecialidade,
-      this.dataConsulta,
-      this.imagem});
+  CardConsulta(this.dtoConsulta, {this.imagem});
 
-  final String nomeMedico;
-  final String nomeHospital;
-  final String nomeCidade;
-  final String nomeEspecialidade;
+  final DTOConsultaComMedico dtoConsulta;
   final Widget imagem;
-  final String dataConsulta;
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +30,30 @@ class CardConsulta extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) => ModalConfirmacao(),
-            );
+            ).then((confirmacao) {
+              if (confirmacao != null && confirmacao) {
+                Medicos()
+                    .removaConsulta(dtoConsulta.horarioConsulta.id)
+                    .then((removeu) {
+                  if (removeu != null && removeu) {
+                    return showDialog(
+                        context: context,
+                        builder: (context) =>
+                            ModalSucesso('Consulta cancelada com sucesso!'));
+                  }
+
+                  return showDialog(
+                      context: context,
+                      builder: (context) => ModalErro(
+                          'Ocorreu um erro ao cancelar sua consulta!'));
+                });
+              }
+            });
           },
         ),
         title: Text(
-          this.dataConsulta,
+          DateFormat('dd/MM/yyyy HH:mm')
+              .format(this.dtoConsulta.horarioConsulta.inicio),
           textAlign: TextAlign.center,
         ),
         subtitle: Column(
@@ -47,15 +61,16 @@ class CardConsulta extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(this.nomeMedico),
-                Text(this.nomeEspecialidade),
+                Text(this.dtoConsulta.medico.medico.pessoa.nome),
+                Text(this.dtoConsulta.medico.medico.especialidade.nome),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(this.nomeHospital),
-                Text(this.nomeCidade),
+                Text(this.dtoConsulta.medico.hospital.razaoSocial),
+                Text(
+                    '${this.dtoConsulta.medico.hospital.pessoa.endereco?.localidade}-${this.dtoConsulta.medico.hospital.pessoa.endereco?.uf}'),
               ],
             ),
           ],

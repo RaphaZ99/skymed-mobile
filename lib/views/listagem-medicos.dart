@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skymed_mobile/model/dto_filtros_medico.dart';
-import 'package:skymed_mobile/model/medico.dart';
+import 'package:skymed_mobile/model/dto_medicoComHospital.dart';
 import 'package:skymed_mobile/provider/medicos.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/barra_topo.dart';
 import 'package:skymed_mobile/widgets/componentes/listagem/botao-filtro.dart';
@@ -14,7 +14,7 @@ class WidgetListagemMedicos extends StatefulWidget {
 }
 
 class _WidgetListagemMedicosState extends State<WidgetListagemMedicos> {
-  Future<List<Medico>> futureMedico;
+  Future<List<DTOMedicoComHospital>> futureMedico;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _WidgetListagemMedicosState extends State<WidgetListagemMedicos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BarraTopo(),
-      body: FutureBuilder<List<Medico>>(
+      body: FutureBuilder<List<DTOMedicoComHospital>>(
           future: futureMedico,
           builder: (context, medicos) {
             if (medicos.hasError) print(medicos.error);
@@ -44,12 +44,6 @@ class _WidgetListagemMedicosState extends State<WidgetListagemMedicos> {
               ),
               child: Column(
                 children: [
-                  Container(
-                    child: Text('Goiânia, Goiás'),
-                    margin: EdgeInsets.only(
-                      bottom: 15.0,
-                    ),
-                  ),
                   Row(
                     children: [
                       Container(

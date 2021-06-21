@@ -7,6 +7,7 @@ import 'package:skymed_mobile/views/historico-consultas.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/barra_topo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/modal/modal-consulta.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-erro.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 final Map<DateTime, List> _holidays = {
@@ -16,6 +17,12 @@ final Map<DateTime, List> _holidays = {
   DateTime(2020, 4, 21): ['Easter Sunday'],
   DateTime(2020, 4, 22): ['Easter Monday'],
 };
+
+extension TimeOfDayExtension on TimeOfDay {
+  TimeOfDay add({int hour = 0, int minute = 0}) {
+    return this.replacing(hour: this.hour + hour, minute: this.minute + minute);
+  }
+}
 
 class WidgetAgendamentoConsulta extends StatefulWidget {
   WidgetAgendamentoConsulta(this.medico, {Key key}) : super(key: key);
@@ -152,9 +159,8 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
               showDialog(
                 context: context,
                 builder: (context) {
-                  return SimpleDialog(
-                    title: Text('O médico não trabalha nesse dia da semana!'),
-                  );
+                  return ModalErro(
+                      'O médico não trabalha nesse dia da semana!');
                 },
               );
 
@@ -171,12 +177,21 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
                       medico.horariosTrabalho.first.inicio);
                   var horarioFinal =
                       TimeOfDay.fromDateTime(medico.horariosTrabalho.first.fim);
+                  var horarioEscolhidoFim = horarioEscolhido.add(
+                    hour: medico.especialidade.duracaoConsulta.hour,
+                    minute: medico.especialidade.duracaoConsulta.minute,
+                  );
 
-                  if (!isBetween(
-                      horarioEscolhido, horarioInicial, horarioFinal)) {
-                    return SimpleDialog(
-                      title: Text(
-                          'O médico apenas trabalha das ${horarioInicial.format(context)} às ${horarioFinal.format(context)}!'),
+                  if (isBetween(
+                          horarioEscolhido, horarioInicial, horarioFinal) &&
+                      isBetween(
+                          horarioEscolhidoFim, horarioInicial, horarioFinal)) {
+                    return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return ModalErro(
+                            'O médico apenas trabalha das ${horarioInicial.format(context)} às ${horarioFinal.format(context)}!');
+                      },
                     );
                   }
 
@@ -184,9 +199,12 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
                       horarioEscolhido,
                       TimeOfDay.fromDateTime(h.inicio),
                       TimeOfDay.fromDateTime(h.fim)))) {
-                    return SimpleDialog(
-                      title: Text(
-                          'O médico já possui uma consulta nesse horário!'),
+                    return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return ModalErro(
+                            'O médico já possui uma consulta nesse horário!');
+                      },
                     );
                   }
 
@@ -213,8 +231,11 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
                         if (!deuCerto) {
                           medico.horariosConsulta.removeLast();
 
-                          return SimpleDialog(
-                            title: Text('Ocorreu um erro ao agendar!'),
+                          return showDialog(
+                            context: context,
+                            builder: (context) {
+                              return ModalErro('Ocorreu um erro ao agendar!');
+                            },
                           );
                         }
 

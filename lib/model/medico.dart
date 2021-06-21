@@ -10,7 +10,6 @@ import 'horario_consulta.dart';
 class Medico {
   final int id;
   Paciente pessoa;
-  //Hospital hospital;
   Especialidade especialidade;
   List<HorarioConsulta> horariosConsulta;
   List<HorarioTrabalho> horariosTrabalho;
@@ -21,7 +20,6 @@ class Medico {
     @required this.especialidade,
     @required this.horariosConsulta,
     @required this.horariosTrabalho,
-    //@required this.hospital,
   });
 
   factory Medico.fromJson(Map<String, dynamic> json) {
@@ -37,7 +35,6 @@ class Medico {
           .cast<Map<String, dynamic>>()
           .map<HorarioTrabalho>((json) => HorarioTrabalho.fromJson(json))
           .toList(),
-      //hospital: Hospital.fromJson(json['hospital']),
     );
   }
 

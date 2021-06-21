@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skymed_mobile/model/medico.dart';
+import 'package:skymed_mobile/model/dto_medicoComHospital.dart';
 import 'package:skymed_mobile/views/agendamento-consulta.dart';
 
 class CardMedico extends StatelessWidget {
   CardMedico(this.medico, {this.imagem});
 
-  final Medico medico;
+  final DTOMedicoComHospital medico;
   final Widget imagem;
 
   @override
@@ -28,21 +28,22 @@ class CardMedico extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => WidgetAgendamentoConsulta(this.medico)),
+                  builder: (context) =>
+                      WidgetAgendamentoConsulta(this.medico.medico)),
             );
           },
         ),
-        title: Text(this.medico.pessoa.nome),
+        title: Text(this.medico.medico.pessoa.nome),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(this.medico.especialidade.nome),
+            Text(this.medico.medico.especialidade.nome),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text('Hospital'),
+                Text(this.medico.hospital.razaoSocial),
                 Text(
-                    '${this.medico.pessoa.endereco?.localidade}-${this.medico.pessoa.endereco?.uf}'),
+                    '${this.medico.hospital.pessoa.endereco?.localidade}-${this.medico.hospital.pessoa.endereco?.uf}'),
               ],
             )
           ],

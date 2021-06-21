@@ -25,8 +25,8 @@ class HorarioTrabalho {
   Map<String, dynamic> toJson() {
     return {
       if (this.id != null) 'id': this.id,
-      'inicio': inicio.toIso8601String(),
-      'fim': fim.toIso8601String(),
+      'inicio': inicio.toUtc().toIso8601String(),
+      'fim': fim.toUtc().toIso8601String(),
       'diaDaSemana': diaDaSemana,
     };
   }

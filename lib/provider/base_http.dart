@@ -20,6 +20,7 @@ class BaseHttp with ChangeNotifier {
   static final baseUrl = 'https://skymed-api.herokuapp.com';
   static String tokenJWT = "";
   static String usuarioEmail = "";
+  static int usuarioId = 0;
 
   static bool estaLogado() {
     return tokenJWT != "";
@@ -77,22 +78,20 @@ class BaseHttp with ChangeNotifier {
     return resposta;
   }
 
-  Future<http.Response> deletePadrao(Object body, Uri url) async {
-    return await post(body, headerPadrao, url);
+  Future<http.Response> deletePadrao(Uri url) async {
+    return await delete(headerPadrao, url);
   }
 
-  Future<http.Response> deleteAutenticado(Object body, Uri url) async {
-    return await post(body, getHeaderAutenticado(), url);
+  Future<http.Response> deleteAutenticado(Uri url) async {
+    return await delete(getHeaderAutenticado(), url);
   }
 
-  Future<http.Response> delete(
-      Object body, Map<String, String> headers, Uri url) async {
+  Future<http.Response> delete(Map<String, String> headers, Uri url) async {
     http.Response resposta = null;
 
     await http
         .delete(
       url,
-      body: body,
       headers: headers,
     )
         .then((value) {

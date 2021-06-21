@@ -16,7 +16,7 @@ class Especialidade {
   factory Especialidade.fromJson(Map<String, dynamic> json) {
     return Especialidade(
       id: json['id'],
-      duracaoConsulta: DateTime.parse(json['duracaoConsulta']).toLocal(),
+      duracaoConsulta: DateTime.parse(json['duracaoConsulta']),
       nome: json['nome'],
       preco: json['preco'],
     );
@@ -25,7 +25,7 @@ class Especialidade {
   Map<String, dynamic> toJson() {
     return {
       if (this.id != null) 'id': this.id,
-      'duracaoConsulta': duracaoConsulta.toIso8601String(),
+      'duracaoConsulta': duracaoConsulta.toUtc().toIso8601String(),
       'nome': nome,
       'preco': preco,
     };

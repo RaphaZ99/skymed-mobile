@@ -20,7 +20,7 @@ class ModalConfirmacao extends StatelessWidget {
               Botao(
                 titulo: 'Confirmar',
                 callback: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 },
               ),
               Botao(

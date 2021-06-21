@@ -17,11 +17,12 @@ class BaseHttp with ChangeNotifier {
     };
   }
 
-  static final baseUrl = 'https://skymed-api.herokuapp.com';
+  static final baseUrl = 'http://192.168.0.109:8080';
   static String tokenJWT = "";
   static String usuarioEmail = "";
 
   static bool estaLogado() {
+  
     return tokenJWT != "";
   }
 

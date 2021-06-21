@@ -18,7 +18,7 @@ class _WidgetListagemMedicosState extends State<WidgetListagemMedicos> {
   @override
   void initState() {
     super.initState();
-    futureMedico = new Medicos().obtenhaMedicos();
+  //  futureMedico = new Medicos().obtenhaMedicos();
   }
 
   @override

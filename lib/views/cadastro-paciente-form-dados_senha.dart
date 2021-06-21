@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skymed_mobile/model/paciente.dart';
 import 'package:skymed_mobile/provider/pacientes.dart';
+import 'package:skymed_mobile/views/login.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 
@@ -32,9 +33,14 @@ class _WidgetCadastroPacienteSenhaState
     //Metodo chama onSave em cada um dos formulários
     _form.currentState.save();
     widget.novoPaciente.usuario.senha = _formData['senha'];
-    if (postData.adicionarPaciente(widget.novoPaciente) == 200) {
-      Navigator.of(context).popUntil((route) => route.isFirst);
-    } else {}
+
+    var response = postData.adicionarPaciente(widget.novoPaciente);
+    if (response == 200) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => WidgetLogin()));
+    } else {
+      print("Caiu no Else");
+    }
   }
 
   @override

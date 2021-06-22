@@ -4,6 +4,7 @@ import 'package:skymed_mobile/provider/base_http.dart';
 import 'package:skymed_mobile/provider/pacientes.dart';
 import 'package:skymed_mobile/views/cadastro_paciente_form_dados_pessoais.dart';
 import 'package:skymed_mobile/views/listagem-medicos.dart';
+import 'package:skymed_mobile/views/recuperar-senha-paciente-informar-email.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/divisor/divisor.dart';
@@ -111,8 +112,26 @@ class _WidgetLoginState extends State<WidgetLogin> {
                       },
                     ),
                   ),
-                  margin: EdgeInsets.only(top: 15.0),
+                  margin: EdgeInsets.only(top: 15.0, bottom: 15),
                   elevation: 0,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              WidgetRecuperarSenhaPacienteIformarEmail()),
+                    );
+                  },
+                  child: Text(
+                    'Esqueceu sua senha? Clique aqui',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      height: 0.5,
+                      color: Colors.blue,
+                    ),
+                  ),
                 ),
                 Botao(
                   titulo: 'Concluir',

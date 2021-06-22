@@ -29,7 +29,7 @@ class Pacientes with ChangeNotifier {
     return Future.value();
   }
 
-  Future<void> adicionarPaciente(Paciente paciente) async {
+  Future<int> adicionarPaciente(Paciente paciente) async {
     final Object body = json.encode({
       "nome": paciente.nome,
       "cpf": paciente.cpf,
@@ -58,6 +58,8 @@ class Pacientes with ChangeNotifier {
     await _baseHttp
         .postPadrao(body, Uri.parse('${BaseHttp.baseUrl}/pessoa'))
         .then((value) {
+      print(value.body);
+      print(value.statusCode);
       return value.statusCode;
     });
   }
@@ -105,6 +107,60 @@ class Pacientes with ChangeNotifier {
         Uri.parse('${BaseHttp.baseUrl}/usuario/${BaseHttp.usuarioEmail}'));
 
     return convertaUsuario(resposta.body);
+  }
+
+  Future<Usuario> obterUsuarioPorEmail(String email) async {
+    final resposta = await _baseHttp
+        .getPadrao(Uri.parse('${BaseHttp.baseUrl}/usuario/${email}'));
+
+    return convertaUsuario(resposta.body);
+  }
+
+  Future<Usuario> atualizaUsuario(Usuario usuario) async {
+    final Object body = json.encode({
+      "id": usuario.id,
+      "email": usuario.email,
+      "senha": usuario.senha,
+      "tokenAutenticacao": "null",
+      "tokenAutenticacaoEmail": usuario.tokenAutenticacaoEmail,
+      "tokenRedefinicaoSenha": usuario.tokenRedefinicaoSenha,
+      "ehAdmin": false,
+      "ehMedico": false,
+      "ehHospital": false,
+      "ehPaciente": true,
+      "ehAutenticado": false,
+      "novaSenha": usuario.novaSenha,
+      "tokenAutenticacao": usuario.tokenAutenticacao
+    });
+
+    final usuarioBody = await _baseHttp.putPadrao(
+        body, Uri.parse('${BaseHttp.baseUrl}/usuario/recuperarsenha'));
+
+    return convertaUsuario(usuarioBody.body);
+  }
+
+  Future<int> alteraUsuario(Usuario usuario) async {
+    final Object body = json.encode({
+      "id": usuario.id,
+      "email": usuario.email,
+      "senha": usuario.senha,
+      "tokenAutenticacao": "null",
+      "tokenAutenticacaoEmail": usuario.tokenAutenticacaoEmail,
+      "tokenRedefinicaoSenha": usuario.tokenRedefinicaoSenha,
+      "ehAdmin": false,
+      "ehMedico": false,
+      "ehHospital": false,
+      "ehPaciente": true,
+      "ehAutenticado": false,
+      "novaSenha": usuario.novaSenha,
+      "tokenAutenticacao": usuario.tokenAutenticacao
+    });
+
+    var response = await _baseHttp.putPadrao(
+        body, Uri.parse('${BaseHttp.baseUrl}/usuario/alterarsenha'));
+
+    var statusCode = response.statusCode;
+    return response.statusCode;
   }
 
   Future<Paciente> obterPaciente() async {

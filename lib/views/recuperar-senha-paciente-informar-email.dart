@@ -8,6 +8,7 @@ import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/campo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/containerInputTexto.dart';
 import 'package:skymed_mobile/widgets/componentes/divisor/divisor.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-erro.dart';
 import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 import 'recuperar-senha-paciente-codigo.dart';
 
@@ -63,7 +64,10 @@ class _WidgetRecuperarSenhaPacienteIformarEmailState
                     usuario: usuario,
                   )));
     } else {
-      print("DEu pau");
+      showDialog(
+          context: context,
+          builder: (context) => ModalErro(
+              "Erro ao Enviar o código de senha. Contate o suporte."));
     }
   }
 

@@ -159,6 +159,9 @@ class _WidgetCadastroPacienteInicioState
                         if (value.trim().isEmpty) {
                           return ('O RG não pode estar vazio');
                         }
+                        if (value.length < 6) {
+                          return ('O RG deve ter mais que 6 ou mais digitos');
+                        }
                       },
                     ),
                   ),

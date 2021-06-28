@@ -2,7 +2,7 @@ class Endereco {
   int id;
   String cep;
   String logradouro;
-  String bairro;
+
   String numero;
   String complemento;
   String localidade;
@@ -10,8 +10,7 @@ class Endereco {
   String ibge;
 
   Endereco(
-      {this.bairro,
-      this.cep,
+      {this.cep,
       this.complemento,
       this.logradouro,
       this.numero,
@@ -23,7 +22,6 @@ class Endereco {
   factory Endereco.fromJson(Map<String, dynamic> json) {
     return Endereco(
         id: json['id'],
-        bairro: json['bairro'],
         cep: json['cep'],
         complemento: json['complemento'],
         logradouro: json['logradouro'],
@@ -36,7 +34,6 @@ class Endereco {
   Map<String, dynamic> toJson() {
     return {
       if (this.id != null) 'id': this.id,
-      'bairro': bairro,
       'cep': cep,
       'complemento': complemento,
       'logradouro': logradouro,

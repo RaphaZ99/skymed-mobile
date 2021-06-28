@@ -66,7 +66,14 @@ class CardConsulta extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(this.dtoConsulta.medico.medico.pessoa.nome),
-                Text(this.dtoConsulta.medico.medico.especialidade.nome),
+                Flexible(
+                  child: Container(
+                    child: Text(
+                      this.dtoConsulta.medico.medico.especialidade.nome,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
               ],
             ),
             Row(

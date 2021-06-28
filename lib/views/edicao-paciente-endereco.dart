@@ -25,6 +25,7 @@ class _WidgetEdicaoPacienteEnderecoState
   final _formData = Map<String, Object>();
   final _form = GlobalKey<FormState>();
   Future<Paciente> futurePaciente;
+  Endereco atualizaEndereco;
 
   void _saveForm() {
     //Metodo chama validator em todos os input
@@ -35,21 +36,22 @@ class _WidgetEdicaoPacienteEnderecoState
     }
     //Metodo chama onSave em cada um dos formulários
     _form.currentState.save();
-
-    var atualizaEndereco = Endereco(
-        cep: _formData['cep'],
-        complemento: _formData['complemento'],
-        logradouro: _formData['logradouro'],
-        numero: _formData['numero'],
-        id: _formData['id'],
-        ibge: _formData['ibge'],
-        localidade: _formData['localidade'],
-        uf: _formData['uf']);
+    _putPaciente.obterEndereco(_formData['cep']).then((value) => {
+          atualizaEndereco = new Endereco(
+              cep: _formData['cep'],
+              complemento: _formData['complemento'],
+              logradouro: _formData['logradouro'],
+              numero: _formData['numero'],
+              uf: value.uf,
+              ibge: value.ibge,
+              localidade: value.localidade,
+              id: _formData['id'])
+        });
 
     atualizaPaciente.endereco = atualizaEndereco;
 
     _putPaciente.atualizaPaciente(atualizaPaciente).then((value) {
-      if (value == 200) {
+      if (value == '200') {
         showDialog(
             context: context,
             builder: (context) =>
@@ -60,7 +62,7 @@ class _WidgetEdicaoPacienteEnderecoState
         showDialog(
             context: context,
             builder: (context) =>
-                ModalErro("Erro ao atualizar o Endereço" + value.toString()));
+                ModalErro("Erro ao atualizar o Endereço" + value));
       }
     });
   }
@@ -164,32 +166,6 @@ class _WidgetEdicaoPacienteEnderecoState
                           validator: (value) {
                             if (value.trim().isEmpty) {
                               return ('Logradouro não pode estar Vazio');
-                            }
-                          },
-                        ),
-                      ),
-                      margin: EdgeInsets.only(top: 15.0),
-                      elevation: 0,
-                    ),
-                    Card(
-                      child: ListTile(
-                        title: TextFormField(
-                          textInputAction: TextInputAction.next,
-                          initialValue: paciente.data.endereco.uf,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'uf',
-                            floatingLabelBehavior: FloatingLabelBehavior.auto,
-                            contentPadding:
-                                EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(32.0),
-                            ),
-                          ),
-                          onSaved: (value) => _formData['uf'] = value,
-                          validator: (value) {
-                            if (value.trim().isEmpty) {
-                              return ('O uf não pode estar vazio');
                             }
                           },
                         ),

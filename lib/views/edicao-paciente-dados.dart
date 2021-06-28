@@ -54,7 +54,7 @@ class _WidgetEdicaoPacienteDadosState extends State<WidgetEdicaoPacienteDados> {
     );
 
     _putPaciente.atualizaPaciente(atualizaPaciente).then((value) {
-      if (value == 200) {
+      if (value == '200') {
         showDialog(
             context: context,
             builder: (context) =>

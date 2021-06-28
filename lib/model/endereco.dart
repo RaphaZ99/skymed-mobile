@@ -4,7 +4,6 @@ class Endereco {
   int id;
   String cep;
   String logradouro;
-
   String numero;
   String complemento;
   String localidade;

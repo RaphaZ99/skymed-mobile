@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:skymed_mobile/model/endereco.dart';
 import 'package:skymed_mobile/model/paciente.dart';
 import 'package:skymed_mobile/model/usuario.dart';
@@ -22,22 +23,42 @@ class _WidgetCadastroPacienteFimState
   final postData = Pacientes();
   final _formData = Map<String, Object>();
   final _form = GlobalKey<FormState>();
+  final mascaraCEP = MaskTextInputFormatter(mask: "#####-###");
+  Endereco _novoEndereco;
 
-  void _saveForm() {
+  void obterEndereco(String cep) {
+    postData.obterEndereco(_formData['cep']).then((value) => {
+          _formData['cep'] = value.cep,
+          _formData['complemento'] = value.complemento,
+          _formData['logradouro'] = value.logradouro,
+          _formData['numero'] = value.numero,
+          _formData['UF'] = value.uf,
+          _formData['ibge'] = value.ibge,
+          _formData['localidade'] = value.localidade
+        });
+  }
+
+  Future<void> _saveForm() async {
     //Metodo _form.currentState.validate chama validator em todos os input
     var isValid = _form.currentState.validate();
 
     if (!isValid) {
       return;
     }
+
     //Metodo chama onSave em cada um dos formulários
     _form.currentState.save();
-    var novoEndereco = Endereco(
-        cep: _formData['cep'],
-        complemento: _formData['complemento'],
-        logradouro: _formData['logradouro'],
-        numero: _formData['numero'],
-        uf: _formData['UF']);
+
+    await postData.obterEndereco(_formData['cep']).then((value) {
+      _novoEndereco = new Endereco(
+          cep: _formData['cep'],
+          complemento: _formData['complemento'],
+          logradouro: _formData['logradouro'],
+          numero: _formData['numero'],
+          uf: value.uf,
+          ibge: value.ibge,
+          localidade: value.localidade);
+    });
 
     var novoUsuario = Usuario(
         ehAdmin: false,
@@ -47,7 +68,7 @@ class _WidgetCadastroPacienteFimState
         ehPaciente: true,
         email: widget.novoPaciente.email);
 
-    widget.novoPaciente.endereco = novoEndereco;
+    widget.novoPaciente.endereco = _novoEndereco;
     widget.novoPaciente.usuario = novoUsuario;
 
     Navigator.push(
@@ -87,6 +108,7 @@ class _WidgetCadastroPacienteFimState
                   child: ListTile(
                     title: TextFormField(
                       textInputAction: TextInputAction.next,
+                      inputFormatters: [mascaraCEP],
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'CEP',
@@ -139,31 +161,6 @@ class _WidgetCadastroPacienteFimState
                   child: ListTile(
                     title: TextFormField(
                       textInputAction: TextInputAction.next,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: 'UF',
-                        floatingLabelBehavior: FloatingLabelBehavior.auto,
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32.0),
-                        ),
-                      ),
-                      onSaved: (value) => _formData['UF'] = value,
-                      validator: (value) {
-                        if (value.trim().isEmpty) {
-                          return ('UF não pode está vazio');
-                        }
-                      },
-                    ),
-                  ),
-                  margin: EdgeInsets.only(top: 15.0),
-                  elevation: 0,
-                ),
-                Card(
-                  child: ListTile(
-                    title: TextFormField(
-                      textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -190,7 +187,6 @@ class _WidgetCadastroPacienteFimState
                   child: ListTile(
                     title: TextFormField(
                       textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
                       //inputFormatters: [mascaraTelefone],
                       obscureText: false,
                       decoration: InputDecoration(

@@ -45,7 +45,9 @@ class Pacientes with ChangeNotifier {
         "logradouro": paciente.endereco.logradouro,
         "complemento": paciente.endereco.complemento,
         "numero": paciente.endereco.numero,
-        "uf": paciente.endereco.uf
+        "uf": paciente.endereco.uf,
+        "ibge": paciente.endereco.ibge,
+        "localidade": paciente.endereco.localidade
       },
       "usuario": {
         "ehAdmin": paciente.usuario.ehAdmin,
@@ -84,7 +86,7 @@ class Pacientes with ChangeNotifier {
         "cep": paciente.endereco.cep,
         "logradouro": paciente.endereco.logradouro,
         "complemento": paciente.endereco.complemento,
-        "numero": paciente.endereco.numero,
+        "ibge": paciente.endereco.ibge,
         "localidade": paciente.endereco.localidade,
         "uf": paciente.endereco.uf
       },

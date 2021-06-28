@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:skymed_mobile/model/usuario.dart';
 import 'package:skymed_mobile/provider/pacientes.dart';
-import 'package:skymed_mobile/views/login.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
-import 'package:skymed_mobile/widgets/componentes/card-campo/containerInputTexto.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-erro.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-sucesso.dart';
 import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 import '../widgets/componentes/card-campo/botao.dart';
-import '../widgets/componentes/card-campo/campo.dart';
 
 class WidgetRecuperarSenhaPacienteNovaSenha extends StatefulWidget {
   Usuario usuario;
@@ -36,16 +35,15 @@ class _WidgetRecuperarSenhaPacienteNovaSenhaState
     widget.usuario.senha = _formData['senha'];
 
     Pacientes().alteraUsuario(widget.usuario).then((value) {
-      if (value == 200) {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => true);
-
-        // Navigator.pushReplacement(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (BuildContext context) => WidgetLogin()));
+      if (value == '200') {
+        showDialog(
+            context: context,
+            builder: (context) =>
+                ModalSucesso("Senha alterada com Sucesso!")).then((value) =>
+            {Navigator.of(context).popUntil((route) => route.isFirst)});
       } else {
-        //Mostrar Er
+        showDialog(context: context, builder: (context) {});
+        ModalErro("Erro ao salvar a senha " + value);
       }
     });
   }

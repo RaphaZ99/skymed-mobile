@@ -8,7 +8,7 @@ import 'package:skymed_mobile/provider/base_http.dart';
 class Pacientes with ChangeNotifier {
   final _baseHttp = new BaseHttp();
 
-  Future<void> authenticate(String senha, String email, context) async {
+  Future<String> authenticate(String senha, String email, context) async {
     final Object body = json.encode(
       {
         "email": email,
@@ -19,17 +19,19 @@ class Pacientes with ChangeNotifier {
     await _baseHttp
         .postPadrao(body, Uri.parse('${BaseHttp.baseUrl}/login'))
         .then((value) {
-      final responseBody = json.decode(value.body);
-
-      BaseHttp.tokenJWT = responseBody['token'];
-      BaseHttp.usuarioEmail = email;
+      if (value.statusCode == 200) {
+        final responseBody = json.decode(value.body);
+        BaseHttp.tokenJWT = responseBody['token'];
+        BaseHttp.usuarioEmail = email;
+        return value.statusCode.toString();
+      } else {
+        return value.statusCode.toString();
+      }
     });
     notifyListeners();
-
-    return Future.value();
   }
 
-  Future<int> adicionarPaciente(Paciente paciente) async {
+  Future<String> adicionarPaciente(Paciente paciente) async {
     final Object body = json.encode({
       "nome": paciente.nome,
       "cpf": paciente.cpf,
@@ -39,10 +41,10 @@ class Pacientes with ChangeNotifier {
       "origemPaciente": paciente.origemPaciente,
       "endereco": {
         "cep": paciente.endereco.cep,
-        "bairro": paciente.endereco.bairro,
         "logradouro": paciente.endereco.logradouro,
         "complemento": paciente.endereco.complemento,
-        "numero": paciente.endereco.numero
+        "numero": paciente.endereco.numero,
+        "uf": paciente.endereco.uf
       },
       "usuario": {
         "ehAdmin": paciente.usuario.ehAdmin,
@@ -54,17 +56,20 @@ class Pacientes with ChangeNotifier {
         "senha": paciente.usuario.senha,
       }
     });
+    var statusCode;
+    var bodyResponse;
 
     await _baseHttp
         .postPadrao(body, Uri.parse('${BaseHttp.baseUrl}/pessoa'))
         .then((value) {
-      print(value.body);
-      print(value.statusCode);
-      return value.statusCode;
+      statusCode = value.statusCode;
+      bodyResponse = value.body;
     });
+
+    return statusCode == 200 ? statusCode.toString() : bodyResponse;
   }
 
-  Future<String> atualizaPaciente(Paciente paciente) async {
+  Future<int> atualizaPaciente(Paciente paciente) async {
     final Object body = json.encode({
       "id": paciente.id,
       "nome": paciente.nome,
@@ -76,12 +81,11 @@ class Pacientes with ChangeNotifier {
       "endereco": {
         "id": paciente.endereco.id,
         "cep": paciente.endereco.cep,
-        "bairro": paciente.endereco.bairro,
         "logradouro": paciente.endereco.logradouro,
         "complemento": paciente.endereco.complemento,
         "numero": paciente.endereco.numero,
         "localidade": paciente.endereco.localidade,
-        "ibge": paciente.endereco.ibge
+        "uf": paciente.endereco.uf
       },
       "usuario": {
         "id": paciente.usuario.id,
@@ -95,11 +99,17 @@ class Pacientes with ChangeNotifier {
       }
     });
 
+    var statusCode;
+    var bodyResponse;
+
     await _baseHttp
         .putPadrao(body, Uri.parse('${BaseHttp.baseUrl}/pessoa'))
         .then((value) {
-      return value.statusCode == 200 ? value.statusCode.toString() : value.body;
+      statusCode = value.statusCode;
+      bodyResponse = value.body;
     });
+
+    return statusCode == 200 ? statusCode.toString() : bodyResponse;
   }
 
   Future<Usuario> obterUsuario() async {
@@ -121,7 +131,6 @@ class Pacientes with ChangeNotifier {
       "id": usuario.id,
       "email": usuario.email,
       "senha": usuario.senha,
-      "tokenAutenticacao": "null",
       "tokenAutenticacaoEmail": usuario.tokenAutenticacaoEmail,
       "tokenRedefinicaoSenha": usuario.tokenRedefinicaoSenha,
       "ehAdmin": false,
@@ -139,7 +148,7 @@ class Pacientes with ChangeNotifier {
     return convertaUsuario(usuarioBody.body);
   }
 
-  Future<int> alteraUsuario(Usuario usuario) async {
+  Future<String> alteraUsuario(Usuario usuario) async {
     final Object body = json.encode({
       "id": usuario.id,
       "email": usuario.email,
@@ -159,8 +168,9 @@ class Pacientes with ChangeNotifier {
     var response = await _baseHttp.putPadrao(
         body, Uri.parse('${BaseHttp.baseUrl}/usuario/alterarsenha'));
 
-    var statusCode = response.statusCode;
-    return response.statusCode;
+    return response.statusCode == 200
+        ? response.statusCode.toString()
+        : response.body;
   }
 
   Future<Paciente> obterPaciente() async {

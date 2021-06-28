@@ -4,6 +4,8 @@ import 'package:skymed_mobile/provider/pacientes.dart';
 import 'package:skymed_mobile/views/login.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-erro.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-sucesso.dart';
 
 import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 
@@ -34,13 +36,21 @@ class _WidgetCadastroPacienteSenhaState
     _form.currentState.save();
     widget.novoPaciente.usuario.senha = _formData['senha'];
 
-    var response = postData.adicionarPaciente(widget.novoPaciente);
-    if (response == 200) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => WidgetLogin()));
-    } else {
-      print("Caiu no Else");
-    }
+    postData.adicionarPaciente(widget.novoPaciente).then((value) {
+      if (value == '200') {
+        showDialog(
+            context: context,
+            builder: (context) =>
+                ModalSucesso("Cadastro Realizado com sucesso : ")).then(
+            (value) =>
+                {Navigator.of(context).popUntil((route) => route.isFirst)});
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) =>
+                ModalErro("Erro ao realizar o cadastro : " + value));
+      }
+    });
   }
 
   @override

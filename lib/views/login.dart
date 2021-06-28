@@ -8,6 +8,7 @@ import 'package:skymed_mobile/views/recuperar-senha-paciente-informar-email.dart
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
 import 'package:skymed_mobile/widgets/componentes/divisor/divisor.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-erro.dart';
 import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 
 class WidgetLogin extends StatefulWidget {
@@ -19,17 +20,22 @@ final _formData = Map<String, Object>();
 final _form = GlobalKey<FormState>();
 final _postLogin = Pacientes();
 
-Future<void> _login(context) async {
+Future<String> _login(context) async {
   if (_form.currentState.validate()) {
     _form.currentState.save();
 
-    await _postLogin.authenticate(
-        _formData['senha'], _formData['email'], context);
-
-    if (BaseHttp.estaLogado()) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => WidgetListagemMedicos()));
-    }
+    await _postLogin
+        .authenticate(_formData['senha'], _formData['email'], context)
+        .then((value) {
+      if (BaseHttp.estaLogado()) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => WidgetListagemMedicos()));
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) => ModalErro("Email/Senha Incorretos"));
+      }
+    });
   }
 }
 
@@ -134,14 +140,13 @@ class _WidgetLoginState extends State<WidgetLogin> {
                   ),
                 ),
                 Botao(
-                  titulo: 'Concluir',
-                  margem: EdgeInsets.only(
-                    top: 40,
-                  ),
-                  callback: () {
-                    _login(this.context);
-                  },
-                ),
+                    titulo: 'Concluir',
+                    margem: EdgeInsets.only(
+                      top: 40,
+                    ),
+                    callback: () {
+                      _login(context);
+                    }),
                 BotaoVoltarPadrao(),
                 Divisor(),
                 GestureDetector(

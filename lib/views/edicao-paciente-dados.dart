@@ -8,6 +8,8 @@ import 'package:skymed_mobile/provider/pacientes.dart';
 import 'package:skymed_mobile/views/menu-usuario.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-erro.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-sucesso.dart';
 
 import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 
@@ -51,10 +53,22 @@ class _WidgetEdicaoPacienteDadosState extends State<WidgetEdicaoPacienteDados> {
       usuario: _formData['usuario'],
     );
 
-    _putPaciente.atualizaPaciente(atualizaPaciente);
-
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => WidgetMenuUsuario()));
+    _putPaciente.atualizaPaciente(atualizaPaciente).then((value) {
+      if (value == 200) {
+        showDialog(
+            context: context,
+            builder: (context) =>
+                ModalSucesso("Dados atualizados com Sucesso")).then((value) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => WidgetMenuUsuario()));
+        });
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) =>
+                ModalErro("Erro ao atualizar o cliente " + value.toString()));
+      }
+    });
   }
 
   @override

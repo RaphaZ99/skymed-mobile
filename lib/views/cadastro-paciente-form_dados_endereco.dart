@@ -34,10 +34,10 @@ class _WidgetCadastroPacienteFimState
     _form.currentState.save();
     var novoEndereco = Endereco(
         cep: _formData['cep'],
-        bairro: _formData['bairro'],
         complemento: _formData['complemento'],
         logradouro: _formData['logradouro'],
-        numero: _formData['numero']);
+        numero: _formData['numero'],
+        uf: _formData['UF']);
 
     var novoUsuario = Usuario(
         ehAdmin: false,
@@ -141,7 +141,7 @@ class _WidgetCadastroPacienteFimState
                       textInputAction: TextInputAction.next,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Bairro',
+                        labelText: 'UF',
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                         contentPadding:
                             EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -149,10 +149,10 @@ class _WidgetCadastroPacienteFimState
                           borderRadius: BorderRadius.circular(32.0),
                         ),
                       ),
-                      onSaved: (value) => _formData['bairro'] = value,
+                      onSaved: (value) => _formData['UF'] = value,
                       validator: (value) {
                         if (value.trim().isEmpty) {
-                          return ('O Bairro não pode estar vazio');
+                          return ('UF não pode está vazio');
                         }
                       },
                     ),

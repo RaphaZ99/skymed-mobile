@@ -4,6 +4,8 @@ import 'package:skymed_mobile/model/paciente.dart';
 import 'package:skymed_mobile/provider/pacientes.dart';
 import 'package:skymed_mobile/widgets/componentes/app-bar/logo.dart';
 import 'package:skymed_mobile/widgets/componentes/card-campo/botao.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-erro.dart';
+import 'package:skymed_mobile/widgets/componentes/modal/modal-sucesso.dart';
 
 import 'package:skymed_mobile/widgets/componentes/padroes/voltar-padrao.dart';
 
@@ -36,19 +38,31 @@ class _WidgetEdicaoPacienteEnderecoState
 
     var atualizaEndereco = Endereco(
         cep: _formData['cep'],
-        bairro: _formData['bairro'],
         complemento: _formData['complemento'],
         logradouro: _formData['logradouro'],
         numero: _formData['numero'],
         id: _formData['id'],
         ibge: _formData['ibge'],
-        localidade: _formData['localidade']);
+        localidade: _formData['localidade'],
+        uf: _formData['uf']);
 
     atualizaPaciente.endereco = atualizaEndereco;
-    _putPaciente.atualizaPaciente(atualizaPaciente);
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => WidgetMenuUsuario()));
+    _putPaciente.atualizaPaciente(atualizaPaciente).then((value) {
+      if (value == 200) {
+        showDialog(
+            context: context,
+            builder: (context) =>
+                ModalSucesso("Endereço atualizado com Sucesso"));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => WidgetMenuUsuario()));
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) =>
+                ModalErro("Erro ao atualizar o Endereço" + value.toString()));
+      }
+    });
   }
 
   @override
@@ -78,6 +92,7 @@ class _WidgetEdicaoPacienteEnderecoState
           _formData['id'] = paciente.data.endereco.id;
           _formData['ibge'] = paciente.data.endereco.ibge;
           _formData['localidade'] = paciente.data.endereco.localidade;
+          _formData['uf'] = paciente.data.endereco.uf;
 
           return Padding(
             padding: EdgeInsets.all(0),
@@ -160,10 +175,10 @@ class _WidgetEdicaoPacienteEnderecoState
                       child: ListTile(
                         title: TextFormField(
                           textInputAction: TextInputAction.next,
-                          initialValue: paciente.data.endereco.bairro,
+                          initialValue: paciente.data.endereco.uf,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Bairro',
+                            labelText: 'uf',
                             floatingLabelBehavior: FloatingLabelBehavior.auto,
                             contentPadding:
                                 EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -171,10 +186,10 @@ class _WidgetEdicaoPacienteEnderecoState
                               borderRadius: BorderRadius.circular(32.0),
                             ),
                           ),
-                          onSaved: (value) => _formData['bairro'] = value,
+                          onSaved: (value) => _formData['uf'] = value,
                           validator: (value) {
                             if (value.trim().isEmpty) {
-                              return ('O Bairro não pode estar vazio');
+                              return ('O uf não pode estar vazio');
                             }
                           },
                         ),

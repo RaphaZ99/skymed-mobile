@@ -41,9 +41,8 @@ class _WidgetCadastroPacienteSenhaState
         showDialog(
             context: context,
             builder: (context) =>
-                ModalSucesso("Cadastro Realizado com sucesso : ")).then(
-            (value) =>
-                {Navigator.of(context).popUntil((route) => route.isFirst)});
+                ModalSucesso("Cadastro Realizado com sucesso!")).then((value) =>
+            {Navigator.of(context).popUntil((route) => route.isFirst)});
       } else {
         showDialog(
             context: context,

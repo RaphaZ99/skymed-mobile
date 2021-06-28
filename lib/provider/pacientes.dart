@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:skymed_mobile/model/endereco.dart';
 import 'package:skymed_mobile/model/paciente.dart';
 import 'package:skymed_mobile/model/usuario.dart';
 import 'package:skymed_mobile/provider/base_http.dart';
@@ -69,7 +70,7 @@ class Pacientes with ChangeNotifier {
     return statusCode == 200 ? statusCode.toString() : bodyResponse;
   }
 
-  Future<int> atualizaPaciente(Paciente paciente) async {
+  Future<String> atualizaPaciente(Paciente paciente) async {
     final Object body = json.encode({
       "id": paciente.id,
       "nome": paciente.nome,
@@ -124,6 +125,13 @@ class Pacientes with ChangeNotifier {
         .getPadrao(Uri.parse('${BaseHttp.baseUrl}/usuario/${email}'));
 
     return convertaUsuario(resposta.body);
+  }
+
+  Future<Endereco> obterEndereco(String cep) async {
+    final resposta = await _baseHttp
+        .getPadrao(Uri.parse('https://viacep.com.br/ws/${cep}/json/'));
+
+    return convertaEndereco(resposta.body);
   }
 
   Future<Usuario> atualizaUsuario(Usuario usuario) async {
@@ -191,5 +199,11 @@ class Pacientes with ChangeNotifier {
     Map usuarioJson = json.decode(body);
 
     return Usuario.fromJson(usuarioJson);
+  }
+
+  Endereco convertaEndereco(String body) {
+    Map enderecoJson = json.decode(body);
+
+    return Endereco.fromJson(enderecoJson);
   }
 }

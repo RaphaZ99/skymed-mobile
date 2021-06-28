@@ -184,6 +184,17 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
                     minute: medico.especialidade.duracaoConsulta.minute,
                   );
 
+                  if (_calendarController.selectedDay
+                      .isBefore(DateTime.now())) {
+                    return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return ModalErro(
+                            'Não é possível marcar para um horário do passado!');
+                      },
+                    );
+                  }
+
                   if (!isBetween(
                           horarioEscolhido, horarioInicial, horarioFinal) ||
                       !isBetween(

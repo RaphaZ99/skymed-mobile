@@ -125,7 +125,8 @@ class _WidgetMenuUsuario extends State<WidgetMenuUsuario> {
               ),
               callback: () {
                 BaseHttp.tokenJWT = "";
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.popUntil(
+                    context, ModalRoute.withName(Navigator.defaultRouteName));
               },
             ),
             BotaoVoltarPadrao(

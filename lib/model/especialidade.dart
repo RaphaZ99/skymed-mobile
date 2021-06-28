@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dart:convert' show utf8;
 
 class Especialidade {
   final int id;
@@ -26,7 +27,7 @@ class Especialidade {
     return {
       if (this.id != null) 'id': this.id,
       'duracaoConsulta': duracaoConsulta.toUtc().toIso8601String(),
-      'nome': nome,
+      'nome': utf8.decode(utf8.encode(nome)),
       'preco': preco,
     };
   }

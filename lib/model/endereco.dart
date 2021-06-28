@@ -1,3 +1,5 @@
+import 'dart:convert' show utf8;
+
 class Endereco {
   int id;
   String cep;
@@ -38,7 +40,7 @@ class Endereco {
       'complemento': complemento,
       'logradouro': logradouro,
       'numero': numero,
-      'localidade': localidade,
+      'localidade': utf8.decode(utf8.encode(localidade)),
       'uf': uf,
       'ibge': ibge,
     };

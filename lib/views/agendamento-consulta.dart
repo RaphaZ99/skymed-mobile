@@ -70,7 +70,9 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
   int convertaDiaSemana(int dia) {
     if (dia == 0) return 7;
 
-    return dia - 1;
+    if (dia == 7) return 6;
+
+    return dia;
   }
 
   void _onVisibleDaysChanged(
@@ -182,9 +184,9 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
                     minute: medico.especialidade.duracaoConsulta.minute,
                   );
 
-                  if (isBetween(
-                          horarioEscolhido, horarioInicial, horarioFinal) &&
-                      isBetween(
+                  if (!isBetween(
+                          horarioEscolhido, horarioInicial, horarioFinal) ||
+                      !isBetween(
                           horarioEscolhidoFim, horarioInicial, horarioFinal)) {
                     return showDialog(
                       context: context,
@@ -195,10 +197,12 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
                     );
                   }
 
-                  if (medico.horariosConsulta.any((h) => isBetween(
-                      horarioEscolhido,
-                      TimeOfDay.fromDateTime(h.inicio),
-                      TimeOfDay.fromDateTime(h.fim)))) {
+                  if (medico.horariosConsulta.any((h) =>
+                      sameDay(_calendarController.selectedDay, h.inicio) &&
+                      isBetween(
+                          horarioEscolhido,
+                          TimeOfDay.fromDateTime(h.inicio),
+                          TimeOfDay.fromDateTime(h.fim)))) {
                     return showDialog(
                       context: context,
                       builder: (context) {
@@ -261,6 +265,12 @@ class _AgendamentoConsultaState extends State<WidgetAgendamentoConsulta>
   bool isBetween(TimeOfDay day, TimeOfDay first, TimeOfDay second) {
     return toDouble(first) <= toDouble(day) &&
         toDouble(day) <= toDouble(second);
+  }
+
+  bool sameDay(DateTime first, DateTime second) {
+    return first.day == second.day &&
+        first.month == second.month &&
+        first.year == second.year;
   }
 
   Widget _buildEventList() {

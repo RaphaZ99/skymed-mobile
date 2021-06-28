@@ -41,11 +41,20 @@ class CardMedico extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(this.medico.hospital.razaoSocial),
-                Text(
-                    '${this.medico.hospital.pessoa.endereco?.localidade}-${this.medico.hospital.pessoa.endereco?.uf}'),
+                Container(
+                  margin: EdgeInsets.only(right: 15.0),
+                  child: Text(this.medico.hospital.razaoSocial),
+                ),
+                Flexible(
+                  child: Container(
+                    child: Text(
+                      '${this.medico.hospital.pessoa.endereco?.localidade}-${this.medico.hospital.pessoa.endereco?.uf}',
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

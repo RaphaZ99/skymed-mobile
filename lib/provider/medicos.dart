@@ -40,12 +40,12 @@ class Medicos with ChangeNotifier {
   Future<List<DTOConsultaComMedico>> obtenhaConsultasPacienteLogado(
       DTOFiltrosMedico filtros) async {
     final todosMedicos = await obtenhaMedicos(filtros);
-    final usuario = await Pacientes().obterUsuario();
+    final paciente = await Pacientes().obterPaciente();
     final List<DTOConsultaComMedico> consultas = [];
 
     todosMedicos.forEach((m) {
       m.medico.horariosConsulta.forEach((h) {
-        if (h.paciente.usuario.id == usuario.id) {
+        if (h.paciente.id == paciente.id) {
           var consultaComMedico =
               DTOConsultaComMedico(horarioConsulta: h, medico: m);
 

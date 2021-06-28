@@ -2,17 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:skymed_mobile/model/paciente.dart';
 
 class BaseHttp with ChangeNotifier {
   final Map<String, String> headerPadrao = {
     'Content-type': 'application/json',
-    'Accept': 'application/json',
+    'Accept': 'application/json; charset=utf-8',
   };
   Map<String, String> getHeaderAutenticado() {
     return {
       'Content-type': 'application/json',
-      'Accept': 'application/json',
+      'Accept': 'application/json; charset=utf-8',
       HttpHeaders.authorizationHeader: 'Bearer $tokenJWT',
     };
   }

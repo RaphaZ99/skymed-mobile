@@ -22,6 +22,12 @@ class _WidgetHistoricoConsultasState extends State<WidgetHistoricoConsultas> {
     future = new Medicos().obtenhaConsultasPacienteLogado(null);
   }
 
+  void funcaoState() {
+    setState(() {
+      future = new Medicos().obtenhaConsultasPacienteLogado(null);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +82,8 @@ class _WidgetHistoricoConsultasState extends State<WidgetHistoricoConsultas> {
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return CardConsulta(consultasComMedico.data[index]);
+                      return CardConsulta(
+                          consultasComMedico.data[index], funcaoState);
                     },
                   ),
                 ],

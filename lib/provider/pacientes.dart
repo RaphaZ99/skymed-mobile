@@ -165,8 +165,8 @@ class Pacientes with ChangeNotifier {
 
   Future<Paciente> obterPaciente() async {
     Usuario usuario = await obterUsuario();
-    final resposta = await _baseHttp
-        .getPadrao(Uri.parse('${BaseHttp.baseUrl}/pessoa/${usuario.id}'));
+    final resposta = await _baseHttp.getPadrao(
+        Uri.parse('${BaseHttp.baseUrl}/pessoa/usuario/${usuario.id}'));
 
     return convertaPaciente(resposta.body);
   }

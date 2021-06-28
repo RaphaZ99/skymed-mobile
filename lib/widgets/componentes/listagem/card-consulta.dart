@@ -8,10 +8,11 @@ import 'package:skymed_mobile/widgets/componentes/modal/modal-erro.dart';
 import 'package:skymed_mobile/widgets/componentes/modal/modal-sucesso.dart';
 
 class CardConsulta extends StatelessWidget {
-  CardConsulta(this.dtoConsulta, {this.imagem});
+  CardConsulta(this.dtoConsulta, this.funcaoState, {this.imagem});
 
   final DTOConsultaComMedico dtoConsulta;
   final Widget imagem;
+  final CallBackState funcaoState;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +38,12 @@ class CardConsulta extends StatelessWidget {
                     .then((removeu) {
                   if (removeu != null && removeu) {
                     return showDialog(
-                        context: context,
-                        builder: (context) =>
-                            ModalSucesso('Consulta cancelada com sucesso!'));
+                            context: context,
+                            builder: (context) =>
+                                ModalSucesso('Consulta cancelada com sucesso!'))
+                        .then((value) {
+                      funcaoState();
+                    });
                   }
 
                   return showDialog(
@@ -68,9 +72,18 @@ class CardConsulta extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(this.dtoConsulta.medico.hospital.razaoSocial),
-                Text(
-                    '${this.dtoConsulta.medico.hospital.pessoa.endereco?.localidade}-${this.dtoConsulta.medico.hospital.pessoa.endereco?.uf}'),
+                Container(
+                  margin: EdgeInsets.only(right: 15.0),
+                  child: Text(this.dtoConsulta.medico.hospital.razaoSocial),
+                ),
+                Flexible(
+                  child: Container(
+                    child: Text(
+                      '${this.dtoConsulta.medico.hospital.pessoa.endereco?.localidade}-${this.dtoConsulta.medico.hospital.pessoa.endereco?.uf}',
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
               ],
             ),
           ],
@@ -79,3 +92,5 @@ class CardConsulta extends StatelessWidget {
     );
   }
 }
+
+typedef CallBackState = void Function();

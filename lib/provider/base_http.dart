@@ -2,28 +2,26 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:skymed_mobile/model/paciente.dart';
 
 class BaseHttp with ChangeNotifier {
   final Map<String, String> headerPadrao = {
     'Content-type': 'application/json',
-    'Accept': 'application/json',
+    'Accept': 'application/json; charset=utf-8',
   };
   Map<String, String> getHeaderAutenticado() {
     return {
       'Content-type': 'application/json',
-      'Accept': 'application/json',
+      'Accept': 'application/json; charset=utf-8',
       HttpHeaders.authorizationHeader: 'Bearer $tokenJWT',
     };
   }
 
-  static final baseUrl = 'http://192.168.0.109:8080';
+  static final baseUrl = 'https://skymed-api.herokuapp.com';
   static String tokenJWT = "";
   static String usuarioEmail = "";
   static int usuarioId = 0;
 
   static bool estaLogado() {
-  
     return tokenJWT != "";
   }
 
